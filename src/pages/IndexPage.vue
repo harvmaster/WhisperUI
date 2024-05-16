@@ -1,30 +1,35 @@
 <template>
   <q-page class="row items-center justify-center">
 
-    <div class="col-12 col-md-auto column q-col-gutter-y-sm q-pa-md">
+    <div class="col-12 col-sm-12 row q-col-gutter-y-sm q-pa-md page-limit-width">
 
       <!-- Header information -->
-      <div class="col-auto row text-h4 text-weight-medium q-col-gutter-x-lg">
-        <div class="col-auto self-center">
-          <q-icon name="upload_file" class="full-height" />
+      <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-md">
+        <div class="col-auto self-center row">
+          <q-icon name="upload_file" class="self-center full-height" />
         </div>
         <div class="col-auto self-center">
           Upload Audio
         </div>
       </div>
-      <div class="coll-auto fit-width text-h6 q-pt-sm q-pb-md">
+      <div class="col-12 fit-width text-h6 q-pt-sm q-pb-md">
         Upload your audio files to transcribe with whisper
       </div>
 
       <!-- Upload component -->
-      <div class="col-auto row">
-        <audio-uploader class="" />
+      <div class="col-12 row">
+        <audio-uploader class="col-12" />
+      </div>
+
+      <div class="col-12 q-py-sm">
+        <q-separator />
+      </div>
+      
+      <div class="col-12 row">
+        <audio-file class="col-12" v-for="file of app.files.value" :key="file.url" />
       </div>
     </div>
 
-    <div class="col-auto row">
-      <audio-file v-for="file of app.files.value" :key="file.url" />
-    </div>
     
 
   </q-page>
@@ -33,6 +38,10 @@
 <style lang="scss" scoped>
 .fit-width {
   width: fit-content
+}
+
+.page-limit-width {
+  max-width: min(50em, 100vw - 2em);
 }
 </style>
 

@@ -22,7 +22,8 @@
   color: #212121;
   border-radius: 1rem;
   cursor: pointer;
-  max-width: 600px;
+  width: 100%;
+  // max-width: 600px;
   aspect-ratio: 16/9;
   border: 2px dashed $blue-4;
 }
