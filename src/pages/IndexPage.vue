@@ -22,30 +22,7 @@
       </div>
     </div>
 
-    <!-- Upload -->
-    <div class="col-12 col-md-6 row upload-section q-col-gutter-y-sm q-pa-md">
-
-      <!-- Upload text and description -->
-      <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-lg">
-        <div class="col-auto self-center">
-          <q-icon name="upload_file" class="full-height" />
-        </div>
-        <div class="col-auto self-center">
-          Upload Audio
-        </div>
-        <div class="col-12 text-h6 q-pt-sm q-pb-md">
-          Upload your audio files to transcribe with whisper
-        </div>
-      </div>
-
-      <!-- Upload component -->
-      <div class="col-12 row">
-        <audio-uploader class="fit" />
-      </div>
-
-    </div>
-
-    <div class="col-12 row">
+    <div class="col-auto row">
       <audio-file v-for="file of app.files.value" :key="file.url" />
     </div>
     
