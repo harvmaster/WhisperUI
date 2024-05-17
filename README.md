@@ -1,34 +1,41 @@
-# WhisperUI (whisperui)
+# Whisper AI Web Interface
 
-An interface to interact with whisper UI. It supports interacting with OpenAI hosted models and local models
+This is a web interface for Whisper AI built using Quasar. This interface transcribes audio and provides timestamps for each word. It connects to self-hosted instances of Whisper AI.
 
-## Install the dependencies
-```bash
-yarn
-# or
+# Installation
+
+To get started with the Whisper AI web interface, follow these steps:
+
+
+
+Clone the repository:
+
+```
+git clone https://github.com/your-username/whisper-ai-web-interface.git
+```
+
+Navigate to the project directory:
+
+```
+cd whisper-ai-web-interface
+```
+
+Install dependencies:
+
+```
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
+# Usage
+
+After installing the dependencies, you can start the development server by running:
+
+```
+npm run dev
 ```
 
+This will start a local server where you can access the web interface and start transcribing audio using Whisper AI.
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
 
 
 
