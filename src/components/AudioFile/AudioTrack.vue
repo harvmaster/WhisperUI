@@ -31,7 +31,7 @@
 import { computed, ref, watch } from 'vue';
 import AudioBar from './AudioBar.vue'
 
-import useAudioPlayer from 'src/composeables/useAudioPlayer';
+import useAudioPlayer from 'src/composables/useAudioPlayer';
 
 export type AudioTrackProps = {
   waveform: {
@@ -40,11 +40,11 @@ export type AudioTrackProps = {
   };
   duration: number;
   position: number;
+
+  seek: (position: number) => void;
 }
 
 const props = defineProps<AudioTrackProps>()
-
-const audioPlayer = useAudioPlayer()
 
 const windowWidth = ref<number>()
 window.addEventListener('resize', () => {
@@ -74,7 +74,7 @@ const audioBars = computed(() => {
   // then map the waveforms to the bars
   // average the groups waveforms
 
-  const { waveform: { waveforms: waveform }, duration, position } = props
+  const { waveform: { waveforms: waveform } } = props
 
   const bars = audioBarCount.value
   const barWidth = waveform.length / bars
@@ -102,10 +102,10 @@ const seekAudio = (e: MouseEvent) => {
 
   const newPosition = position * props.duration
   console.log(newPosition)
-  audioPlayer.seek(newPosition)
+  props.seek(newPosition)
 }
 
-const barPositions = ref<number[]>(audioBars.value.map(() => 0))
+const barPositions = ref<number[]>(new Array(50).fill(0))
 watch(() => props.position, () => {
   const position = props.position
   const duration = props.duration

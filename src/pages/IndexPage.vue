@@ -25,7 +25,7 @@
         <q-separator />
       </div>
       
-      <div class="col-12 row">
+      <div class="col-12 row q-col-gutter-y-md">
         <audio-file class="col-12" v-for="file of app.files.value" :key="file.url" :src="file.url"  :url="file.url" :audio="file.audio" :file="file.file" :transcript="file.transcript"/>
       </div>
     </div>

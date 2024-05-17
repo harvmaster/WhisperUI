@@ -10,22 +10,22 @@
         <!-- Header -->
         <div ref="audioFileHeader" class="audio-file-header q-pa-md pill col-12 row" :style="`transform: translateY(${expanded ? '0' : '100%'});`">
           <div class="col-auto q-pr-md">
-            <q-btn v-if="!isPlaying" flat round dense icon="play_arrow" color="blue-4" @click="playAudio" />
-            <q-btn v-else flat round dense icon="pause" color="blue-4" @click="playAudio" />
+            <q-btn v-if="!isPlaying" flat round dense icon="play_arrow" color="blue-4" @click="play" />
+            <q-btn v-else flat round dense icon="pause" color="blue-4" @click="pause" />
           </div>
   
           <div class="col row">
-            <audio-track class="col-12" :duration="audio.duration" :waveform="audio.waveform" :position="isCurrentSrc ? audioPlayer.position.value : 0" />
+            <audio-track class="col-12" :duration="audio.duration" :waveform="audio.waveform" :position="position" :seek="seek" />
           </div>
 
           <div class="col-auto">
             <span class="text-blue-4 text-subtitle1">
               {{ 
-                Math.floor(audioPlayer.position.value / 60)
+                Math.floor(position / 60)
               }}:{{ 
-                Math.floor(audioPlayer.position.value % 60) < 10 ? '0' : '' 
+                Math.floor(position % 60) < 10 ? '0' : '' 
               }}{{ 
-                Math.floor(audioPlayer.position.value % 60)
+                Math.floor(position % 60)
               }}
               /
               {{ 
@@ -133,7 +133,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-import useAudioPlayer from 'src/composeables/useAudioPlayer';
+import useAudioPlayer from 'src/composables/useAudioPlayer';
 
 import AudioTrack from './AudioTrack.vue'
 import { UploadedAudioFile } from 'src/boot/app';
@@ -146,7 +146,15 @@ const props = defineProps<AudioFileProps>()
 
 console.log(props)
 
-const audioPlayer = useAudioPlayer()
+const {
+  play,
+  pause,
+  seek,
+  isActive,
+  isPlaying,
+  status,
+  position,
+} = useAudioPlayer(props.url)
 
 const audioFileHeader = ref<HTMLElement | null>(null)
 const audioFileContent = ref<HTMLElement | null>(null)
@@ -193,21 +201,4 @@ const expand = () => {
 const collapse = () => {
   expanded.value = false
 }
-
-const playAudio = () => {
-  if (audioPlayer.status.value == 'PAUSED') {
-    audioPlayer.play(props.src)
-  } else {
-    audioPlayer.pause()
-  }
-}
-
-const isPlaying = computed(() => {
-  return audioPlayer.status.value == 'PLAYING' && audioPlayer.playerSrc.value == props.src
-})
-
-const isCurrentSrc = computed(() => {
-  return audioPlayer.playerSrc.value == props.src
-})
-
 </script>
