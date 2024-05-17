@@ -1,7 +1,7 @@
 <template>
   <q-page class="row items-center justify-center">
 
-    <div class="col-12 col-sm-12 row q-col-gutter-y-sm q-pa-md page-limit-width">
+    <div class="col-12 col-sm-12 row q-col-gutter-y-md q-pa-md page-limit-width">
 
       <!-- Header information -->
       <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-md">
@@ -21,12 +21,12 @@
         <audio-uploader class="col-12" />
       </div>
 
-      <div class="col-12 q-py-sm">
+      <div class="col-12 ">
         <q-separator />
       </div>
       
       <div class="col-12 row">
-        <audio-file class="col-12" v-for="file of app.files.value" :key="file.url" />
+        <audio-file class="col-12" v-for="file of app.files.value" :key="file.url" :src="file.url"  :url="file.url" :audio="file.audio" :file="file.file" :transcript="file.transcript"/>
       </div>
     </div>
 

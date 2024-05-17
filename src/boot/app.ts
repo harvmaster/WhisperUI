@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue';
 export type AudioInformation = {
   duration: number;
   waveform: {
-    waveforms: Float32Array[];
+    waveforms: number[];
     sampleRate: number;
   };
 }

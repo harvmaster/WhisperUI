@@ -3,18 +3,39 @@
     <div class="audio-file-container row" :style="containerStyle">
 
       <!-- file name -->
-      <span class="col-12 fit-height relative text-h6 q-px-md row" :style="fileNameHeight">
+      <div class="col-12 fit-height relative text-h6 q-px-md row" :style="fileNameHeight">
         <span class="col-12 self-center">
           My File Name
         </span>
         <!-- Header -->
         <div ref="audioFileHeader" class="audio-file-header q-pa-md pill col-12 row" :style="`transform: translateY(${expanded ? '0' : '100%'});`">
           <div class="col-auto q-pr-md">
-            <q-btn flat round dense icon="play_arrow" color="blue-4" @click="playAudio" />
+            <q-btn v-if="!isPlaying" flat round dense icon="play_arrow" color="blue-4" @click="playAudio" />
+            <q-btn v-else flat round dense icon="pause" color="blue-4" @click="playAudio" />
           </div>
   
           <div class="col row">
-            <audio-track class="col-12" />
+            <audio-track class="col-12" :duration="audio.duration" :waveform="audio.waveform" :position="isCurrentSrc ? audioPlayer.position.value : 0" />
+          </div>
+
+          <div class="col-auto">
+            <span class="text-blue-4 text-subtitle1">
+              {{ 
+                Math.floor(audioPlayer.position.value / 60)
+              }}:{{ 
+                Math.floor(audioPlayer.position.value % 60) < 10 ? '0' : '' 
+              }}{{ 
+                Math.floor(audioPlayer.position.value % 60)
+              }}
+              /
+              {{ 
+                Math.floor(audio.duration / 60)
+              }}:{{
+                Math.floor(audio.duration % 60) < 10 ? '0' : ''
+              }}{{
+                Math.floor(audio.duration % 60)
+              }}
+            </span>
           </div>
   
           <div class="col-auto">
@@ -22,11 +43,33 @@
             <q-btn v-else flat round dense icon="keyboard_arrow_up" color="blue-4" @click="collapse" />
           </div>
         </div>
-      </span>
+      </div>
+
+      <div ref="audioFileContent" class="col-12 row overflow-hidden animate-height" :style="!expanded ? fileNameHeight : audioFileContentHeight">
+        <div class="col-12 q-px-md row" :style="fileNameHeight">
+          <span class="col-12 self-center text-grey-10">
+            <span class="text-grey-9 text-weight-medium text-h6 ">
+              {{ file.name }}
+            </span>
+            <span class="text-caption">
+              ({{ (file.size/1024/1024).toPrecision(2) }} MB)
+            </span>
+          </span>
+        </div>
+
+        <div class="col-12 q-px-md">
+          <q-separator />
+        </div>
+
+        <div class="col-12 text-h6 text-grey-9 q-pa-md">
+          A really long string of text that will be hidden when the file is collapsed. There should be a button to expand the file and show this text.
+        
+        </div>
+      </div>
 
 
       <!-- Body -->
-      <transition name="shrink-y">
+      <!-- <transition name="shrink-y">
         <div v-if="expanded" class="audio-file-body col-12">
           <div class="fit-width row">
             <div class="col-auto">
@@ -42,7 +85,7 @@
             </div>
           </div>
         </div>
-      </transition>
+      </transition> -->
 
     </div>
 
@@ -82,25 +125,31 @@
   width: 100%;
 }
 
-.shrink-y-enter-active, .shrink-y-leave-active {
-  transition: max-height 0.5s;
+.animate-height {
+  transition: height 0.5s;
 }
-
-.shrink-y-enter-from, .shrink-y-leave-to {
-  max-height: 0;
-}
-
-.shrink-y-enter-to, .shrink-y-leave-from {
-  max-height: 250px;
-}
-
 </style>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+
+import useAudioPlayer from 'src/composeables/useAudioPlayer';
+
 import AudioTrack from './AudioTrack.vue'
+import { UploadedAudioFile } from 'src/boot/app';
+
+export type AudioFileProps = UploadedAudioFile & {
+  src: string
+}
+
+const props = defineProps<AudioFileProps>()
+
+console.log(props)
+
+const audioPlayer = useAudioPlayer()
 
 const audioFileHeader = ref<HTMLElement | null>(null)
+const audioFileContent = ref<HTMLElement | null>(null)
 
 const headerHeight = computed(() => {
   return audioFileHeader.value ? audioFileHeader.value.clientHeight : 0
@@ -109,6 +158,24 @@ const headerHeight = computed(() => {
 const fileNameHeight = computed(() => {
   return {
     height: `${headerHeight.value}px`
+  }
+})
+
+const audioFileContentHeight = computed(() => {
+  // get height including the hidden elements
+  let audioFileHeight = headerHeight.value
+  if (audioFileContent.value) {
+    let childrenHeight = 0;
+    for (let i = 0; i < audioFileContent.value.children.length; i++) {
+      console.log(i, audioFileContent.value.children[i])
+      console.log(audioFileContent.value.children[i].clientHeight)
+      childrenHeight += audioFileContent.value.children[i].clientHeight
+    }
+    audioFileHeight = childrenHeight
+  }
+
+  return {
+    height: `${audioFileHeight}px`
   }
 })
 
@@ -126,5 +193,21 @@ const expand = () => {
 const collapse = () => {
   expanded.value = false
 }
+
+const playAudio = () => {
+  if (audioPlayer.status.value == 'PAUSED') {
+    audioPlayer.play(props.src)
+  } else {
+    audioPlayer.pause()
+  }
+}
+
+const isPlaying = computed(() => {
+  return audioPlayer.status.value == 'PLAYING' && audioPlayer.playerSrc.value == props.src
+})
+
+const isCurrentSrc = computed(() => {
+  return audioPlayer.playerSrc.value == props.src
+})
 
 </script>

@@ -16,7 +16,8 @@
 import { ref, computed } from 'vue'
 
 export type AudioBarProps = {
-  amplitude: number
+  amplitude: number;
+  fill: number; // value between 0 and 1
 }
 
 const props = defineProps<AudioBarProps>()
@@ -26,7 +27,9 @@ const barStyles = computed(() => {
   const barHeight = amplitude.value * 40
 
   return {
-    height: `${60 + barHeight}%`
+    height: `${60 + barHeight}%`,
+    // transition between blue-2 to blue-4 based on fill
+    backgroundColor: `hsl(200, 100%, ${70 - props.fill * 20}%)`
   }
 })
 </script>
