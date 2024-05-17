@@ -17,7 +17,7 @@ git clone https://github.com/your-username/whisper-ai-web-interface.git
 Navigate to the project directory:
 
 ```
-cd whisper-ai-web-interface
+cd WhisperUI
 ```
 
 Install dependencies:
