@@ -11,7 +11,7 @@ To get started with the Whisper AI web interface, follow these steps:
 Clone the repository:
 
 ```
-git clone https://github.com/your-username/whisper-ai-web-interface.git
+git clone https://github.com/harvmaster/WhisperUI
 ```
 
 Navigate to the project directory:
