@@ -25,7 +25,6 @@ const play = (source?: string) => {
   if (source && player.value.src !== source) {
     src.value = source
     player.value.src = source
-    // seek(0)
   }
 
   if (position.value >= player.value.duration) {

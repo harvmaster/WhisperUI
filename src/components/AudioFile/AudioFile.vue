@@ -61,31 +61,30 @@
           <q-separator />
         </div>
 
-        <div class="col-12 text-h6 text-grey-9 q-pa-md">
-          A really long string of text that will be hidden when the file is collapsed. There should be a button to expand the file and show this text.
+        <div class="col-12 text-h6 text-grey-9 q-pa-md" style="max-height: 10em; overflow: auto;">
+          <div class="col-12 row" v-for="line in transcript.segments" :key="line.id">
+            <div v-for="word in line.words" :key="word.start" class="col-auto" @click="() => seek(word.start)">
+              <span class="transcribed-word q-pa-xs">
+                {{ word.word }}
+                <div class="transcribed-word-videtime">
+                  {{ 
+                    Math.floor(word.start / 60)
+                  }}:{{ 
+                    Math.floor(word.start % 60) < 10 ? '0' : '' 
+                  }}{{ 
+                    Math.floor(word.start % 60)
+                  }}
+                </div>
+              </span>
+              <div class="col-auto q-px-xs">
+            </div>
+
+            </div>
+          </div>
+          <!-- A really long string of text that will be hidden when the file is collapsed. There should be a button to expand the file and show this text. -->
         
         </div>
       </div>
-
-
-      <!-- Body -->
-      <!-- <transition name="shrink-y">
-        <div v-if="expanded" class="audio-file-body col-12">
-          <div class="fit-width row">
-            <div class="col-auto">
-              <q-icon name="description" class="self-center full-height" />
-            </div>
-            <div class="col">
-              <div class="text-h6 text-weight-medium">
-                File Name
-              </div>
-              <div class="text-h6">
-                My file name
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition> -->
 
     </div>
 
@@ -128,6 +127,30 @@
 .animate-height {
   transition: height 0.5s;
 }
+
+.transcribed-word {
+  cursor: pointer;
+  --show-videotime: hidden;
+  position: relative;
+}
+.transcribed-word:hover {
+  text-decoration: underline;
+  background-color: $blue-2;
+  --show-videotime: visible;
+}
+.transcribed-word-videtime {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  text-align: center;
+  transform: translate(0%, 100%);
+  line-height: 0;
+  color: $grey-7;
+  font-size: 0.5em;
+  visibility: var(--show-videotime);
+}
 </style>
 
 <script setup lang="ts">
@@ -138,6 +161,8 @@ import useAudioPlayer from 'src/composables/useAudioPlayer';
 import AudioTrack from './AudioTrack.vue'
 import { UploadedAudioFile } from 'src/boot/app';
 
+import exampleTranscript from 'src/data/example_transcript'
+
 export type AudioFileProps = UploadedAudioFile & {
   src: string
 }
@@ -145,6 +170,9 @@ export type AudioFileProps = UploadedAudioFile & {
 const props = defineProps<AudioFileProps>()
 
 console.log(props)
+console.log(exampleTranscript)
+
+const transcript = ref(exampleTranscript)
 
 const {
   play,
@@ -197,8 +225,18 @@ const containerStyle = computed(() => {
 const expanded = ref(false)
 const expand = () => {
   expanded.value = true
+  keepInSight()
+  setTimeout(keepInSight, 100)
+  setTimeout(keepInSight, 300)
+  setTimeout(keepInSight, 500)
 }
 const collapse = () => {
   expanded.value = false
+}
+
+const keepInSight = () => {
+  if (audioFileContent.value) {
+    audioFileContent.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 }
 </script>
