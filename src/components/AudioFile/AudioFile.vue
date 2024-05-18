@@ -63,7 +63,15 @@
 
         <div class="col-12 text-h6 text-grey-9 q-pa-md" style="max-height: 10em; overflow: auto;">
           <div class="col-12 row" v-for="line in transcript.segments" :key="line.id">
-            <div v-for="word in line.words" :key="word.start" class="col-auto" @click="() => seek(word.start)">
+            <div 
+                v-for="word in line.words" :key="word.start" 
+                class="col-auto"
+                :class="[
+                  position >= word.start && 'transcribed-word-active',
+                  position > word.end && 'transcribed-word-finished'
+                ].join(' ')" 
+                @click="() => seek(word.start)"
+              >
               <span class="transcribed-word q-pa-xs">
                 {{ word.word }}
                 <div class="transcribed-word-videtime">
@@ -135,8 +143,14 @@
 }
 .transcribed-word:hover {
   text-decoration: underline;
-  background-color: $blue-2;
+  background-color: $blue-3;
   --show-videotime: visible;
+}
+.transcribed-word-active {
+  background-color: $blue-3;
+}
+.transcribed-word-finished {
+  background-color: $blue-2;
 }
 .transcribed-word-videtime {
   position: absolute;

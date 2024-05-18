@@ -51,7 +51,6 @@ const openFileBrowser = () => {
 
     const { waveforms, sampleRate } = await createWaveforms(file);
 
-
     const afterWaveforms = performance.now();
     
     const averaged = await getCombinedAverageWaveform(waveforms, sampleRate, duration/2000);
@@ -85,7 +84,8 @@ const openFileBrowser = () => {
           sampleRate,
         }
       },
-      transcript: []
+      transcript: [],
+      loading: true
     })
 
   };
