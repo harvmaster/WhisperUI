@@ -31,6 +31,7 @@
 
 <script setup lang="ts">
 import { app } from 'boot/app'
+import {  UploadedAudioFile } from 'src/types';
 
 import createWaveforms from 'src/lib/Audio/createWaveforms';
 import getCombinedAverageWaveform from 'src/lib/Audio/getCombinedAverageWaveform';
@@ -45,6 +46,8 @@ const openFileBrowser = () => {
   fileInput.accept = 'audio/*';
   fileInput.onchange = async (e) => {
     const file = e.target.files[0];
+
+    const trascriptPromise = transcribeAudio(file);
 
     const start = performance.now()
     const duration = await getAudioDuration(file);
@@ -62,7 +65,7 @@ const openFileBrowser = () => {
     console.log('Duration:', afterDuration - start);
     console.log('Waveforms:', afterWaveforms - afterDuration);
     console.log('Averaged:', afterAveraged - afterWaveforms);
-    console.log(averaged)
+    // console.log(averaged)
 
     const max = Math.max(...averaged);
     const min = Math.min(...averaged);
@@ -72,11 +75,12 @@ const openFileBrowser = () => {
       return (value - min) / range;
     });
 
-    console.log(scaled);
+    // console.log(scaled);
 
     console.log(file);
     console.log('generating id', generateId())
 
+    
     const audioFile = {
       id: generateId(),
       file,
@@ -88,14 +92,13 @@ const openFileBrowser = () => {
           sampleRate,
         }
       },
-      transcript: [],
+      transcript: null,
       loading: true
-    }
-
+    } as UploadedAudioFile;
     app.files.value.push(audioFile);
 
-    transcribeAudio(audioFile);
-
+    const transcript = await trascriptPromise;
+    audioFile.transcript = transcript;
   };
   fileInput.click();
 }

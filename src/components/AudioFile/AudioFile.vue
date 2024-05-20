@@ -64,7 +64,7 @@
           <q-separator />
         </div>
 
-        <div class="col-12 text-h6 text-grey-9 q-pa-md" style="max-height: 10em; overflow: auto;">
+        <div v-if="transcript" class="col-12 text-h6 text-grey-9 q-pa-md" style="max-height: 10em; overflow: auto;">
           <div class="col-12 row" v-for="line in transcript.segments" :key="line.id">
             <div 
                 v-for="word in line.words" :key="word.start" 
@@ -172,13 +172,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-
-import useAudioPlayer from 'src/composables/useAudioPlayer';
+import { app } from 'src/boot/app';
+import { UploadedAudioFile } from 'src/types';
 
 import AudioTrack from './AudioTrack.vue'
-import { UploadedAudioFile, app } from 'src/boot/app';
 
-import exampleTranscript from 'src/data/example_transcript'
+import useAudioPlayer from 'src/composables/useAudioPlayer';
 
 export type AudioFileProps = UploadedAudioFile & {
   src: string
@@ -191,7 +190,10 @@ console.log('Audio file loading: ', props.loading)
 console.log('Audio File url: ', props.url)
 // console.log(exampleTranscript)
 
-const transcript = ref(exampleTranscript)
+// const transcript = ref(exampleTranscript)
+const transcript = computed(() => {
+  return props.transcript
+})
 
 const {
   play,

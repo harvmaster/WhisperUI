@@ -1,37 +1,5 @@
 import { reactive, ref, watch } from 'vue';
-
-export type AudioInformation = {
-  duration: number;
-  waveform: {
-    waveforms: number[];
-    sampleRate: number;
-  };
-}
-
-export type WhisperTranscript = {
-  text: string;
-  confidence: number;
-  start: number;
-  end: number;
-  speaker: number;
-}
-
-export type UploadedAudioFile = {
-  id: string;
-  file: File;
-  url: string;
-  audio: AudioInformation;
-  transcript: WhisperTranscript[];
-  loading: boolean;
-}
-
-export type Settings = {
-  endpoint: string;
-  encode: boolean;
-  task: 'Transcribe' | 'Translate';
-  language: string;
-  timestamps: boolean;
-}
+import { UploadedAudioFile, Settings } from 'src/types';
 
 class App {
   readonly files = reactive<{ value: UploadedAudioFile[] }>({ value: [] });
@@ -58,11 +26,12 @@ class App {
 
   initListeners () {
     watch(this.files, () => {
-      localStorage.setItem('files', JSON.stringify(this.files.value));
+      this.files.value[0].file.
+      // localStorage.setItem('files', JSON.stringify(this.files.value));
     })
 
     watch(this.settings, () => {
-      localStorage.setItem('settings', JSON.stringify(this.settings.value));
+      // localStorage.setItem('settings', JSON.stringify(this.settings.value));
     })
   }
 }
