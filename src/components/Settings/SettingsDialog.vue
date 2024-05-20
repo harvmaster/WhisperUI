@@ -9,23 +9,23 @@
         
         <!-- Actual settings -->
         <transition-group name="slide-in" tag="div" class="col-12 row q-col-gutter-y-sm">
-          <div class="col-12 row">
+          <div class="col-12 row" key="endpoint_input">
             <q-input class="col-12" v-model="app.settings.value.endpoint" outlined label="Whisper Endpoint" />
           </div>
 
-          <div class="col-12 row">
+          <div class="col-12 row" key="encode_checkbox">
             <q-checkbox v-model="app.settings.value.encode" label="Encode audio" />
           </div>
 
-          <div class="col-12 row">
+          <div class="col-12 row" key="task_select">
             <q-select class="col-12" v-model="app.settings.value.task" borderless label="Task" :options="whisperOptions.tasks" />
           </div>
 
-          <div class="col-12 row" v-if="app.settings.value.task == 'Translate'" >
+          <div class="col-12 row" key="language_select" v-if="app.settings.value.task == 'Translate'" >
             <q-select class="col-12" v-model="app.settings.value.language" outlined label="Language" :options="whisperOptions.language"/>
           </div>
 
-          <div class="col-12 row">
+          <div class="col-12 row" key="timestmap_checkbox">
             <q-checkbox v-model="app.settings.value.timestamps" label="Timestamps" />
           </div>
 

@@ -4,9 +4,12 @@
 
       <!-- file name -->
       <div class="col-12 fit-height relative text-h6 q-px-md row" :style="fileNameHeight">
-        <span class="col-12 self-center">
+        <span class="col self-center">
           My File Name
         </span>
+        <div class="col-auto self-center">
+          <q-btn flat dense round icon="delete" color="blue-8" @click="deleteFile" />
+        </div>
         <!-- Header -->
         <div ref="audioFileHeader" class="audio-file-header q-pa-md pill col-12 row" :style="`transform: translateY(${expanded ? '0' : '100%'});`">
           <div class="col-auto q-pr-md">
@@ -173,7 +176,7 @@ import { computed, ref } from 'vue'
 import useAudioPlayer from 'src/composables/useAudioPlayer';
 
 import AudioTrack from './AudioTrack.vue'
-import { UploadedAudioFile } from 'src/boot/app';
+import { UploadedAudioFile, app } from 'src/boot/app';
 
 import exampleTranscript from 'src/data/example_transcript'
 
@@ -183,8 +186,10 @@ export type AudioFileProps = UploadedAudioFile & {
 
 const props = defineProps<AudioFileProps>()
 
-console.log(props)
-console.log(exampleTranscript)
+console.log('Audio File Id: ', props.id)
+console.log('Audio file loading: ', props.loading)
+console.log('Audio File url: ', props.url)
+// console.log(exampleTranscript)
 
 const transcript = ref(exampleTranscript)
 
@@ -252,5 +257,10 @@ const keepInSight = () => {
   if (audioFileContent.value) {
     audioFileContent.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+}
+
+const deleteFile = () => {
+  console.log('deleting file', props.id)
+  app.files.value = app.files.value.filter((file) => file.id !== props.id)
 }
 </script>

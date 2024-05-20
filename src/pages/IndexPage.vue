@@ -21,12 +21,21 @@
         <audio-uploader class="col-12" />
       </div>
 
-      <div class="col-12 ">
+      <div v-if="app.files.value.length > 0" class="col-12">
         <q-separator />
       </div>
       
       <div class="col-12 row q-col-gutter-y-md">
-        <audio-file class="col-12" v-for="file of app.files.value" :key="file.url" :src="file.url"  :url="file.url" :audio="file.audio" :file="file.file" :transcript="file.transcript"/>
+        <audio-file class="col-12" v-for="file of app.files.value"
+          :key="file.url"
+          :id="file.id"
+          :src="file.url"
+          :url="file.id"
+          :audio="file.audio"
+          :file="file.file"
+          :transcript="file.transcript"
+          :loading="file.loading"
+        />
       </div>
     </div>
 

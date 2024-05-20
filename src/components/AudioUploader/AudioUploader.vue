@@ -36,6 +36,8 @@ import createWaveforms from 'src/lib/Audio/createWaveforms';
 import getCombinedAverageWaveform from 'src/lib/Audio/getCombinedAverageWaveform';
 import getAverageWaveforms from 'src/lib/Audio/getAverageWaveforms';
 import getAudioDuration from 'src/lib/Audio/getAudioDuration';
+import transcribeAudio from 'src/composables/transcribeAudio';
+import generateId from 'src/composables/generateId';
 
 const openFileBrowser = () => {
   const fileInput = document.createElement('input');
@@ -73,8 +75,10 @@ const openFileBrowser = () => {
     console.log(scaled);
 
     console.log(file);
+    console.log('generating id', generateId())
 
-    app.files.value.push({
+    const audioFile = {
+      id: generateId(),
       file,
       url: URL.createObjectURL(file),
       audio: {
@@ -86,7 +90,11 @@ const openFileBrowser = () => {
       },
       transcript: [],
       loading: true
-    })
+    }
+
+    app.files.value.push(audioFile);
+
+    transcribeAudio(audioFile);
 
   };
   fileInput.click();
