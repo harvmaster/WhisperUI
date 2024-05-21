@@ -14,12 +14,14 @@ export type AudioFileProps = {
 
   audio?: AudioInformation
   transcript?: TranscribedAudio;
+  createdAt?: Date;
 }
 
 export class AudioFile {
   id: string;
   file: File;
   src: string;
+  createdAt: Date;
   
   audio?: AudioInformation;
   transcript?: TranscribedAudio;
@@ -34,6 +36,7 @@ export class AudioFile {
     // optional props
     this.audio = props.audio;
     this.transcript = props.transcript;
+    this.createdAt = props.createdAt || new Date();
 
     // create url for audio file
     this.src = URL.createObjectURL(this.file);
@@ -87,7 +90,8 @@ export class AudioFile {
         data: await this.file.arrayBuffer()
       },
       audio: _.cloneDeep(this.audio),
-      transcript: _.cloneDeep(this.transcript)
+      transcript: _.cloneDeep(this.transcript),
+      createdAt: this.createdAt
     }
   }
 

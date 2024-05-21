@@ -1,3 +1,4 @@
+import AudioFile from "./core/AudioFile";
 
 export type AudioInformation = {
   duration: number;
@@ -43,6 +44,7 @@ export type UploadedAudioFile = {
 
   audio?: AudioInformation;
   transcript?: TranscribedAudio;
+  createdAt?: Date;
   
   loading: boolean;
 }
@@ -57,10 +59,14 @@ export type Settings = {
 
 export type Database__Settings = Settings
 
-export type Database__AudioFile = Omit<UploadedAudioFile, 'url' | 'loading' | 'file'> & {
+export type Database__AudioFile = {
+  id: string;
+  createdAt: Date;
   file: {
     name: string;
     type: string;
     data: ArrayBuffer;
   }
+  audio: AudioInformation;
+  transcript: TranscribedAudio;
 }
