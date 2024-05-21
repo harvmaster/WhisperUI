@@ -3,9 +3,9 @@
     <div class="audio-file-container row" :style="containerStyle">
 
       <!-- file name -->
-      <div class="col-12 fit-height relative text-h6 q-px-md row" :style="fileNameHeight">
+      <div class="col-12 fit-height relative text-h6 q-pa-md row" :style="fileNameHeight">
         <span class="col self-center">
-          My File Name
+          {{ file.file.name }}
         </span>
         <div class="col-auto self-center">
           <q-btn flat dense round icon="delete" color="blue-8" @click="deleteFile" />
@@ -220,6 +220,7 @@ const fileNameHeight = computed(() => {
 
 const audioFileContentHeight = computed(() => {
   // get height including the hidden elements
+  const transcript = props.file.transcript
   let audioFileHeight = headerHeight.value
   if (audioFileContent.value) {
     let childrenHeight = 0;
