@@ -176,8 +176,9 @@ import { app } from 'src/boot/app';
 import AudioFile from 'src/core/AudioFile';
 
 import AudioTrack from './AudioTrack.vue'
-
 import useAudioPlayer from 'src/composables/useAudioPlayer';
+
+import deleteAudioFile from 'src/core/Database/audioFile/deleteAudioFile'
 
 export type AudioFileProps = {
   file: AudioFile;
@@ -264,6 +265,8 @@ const keepInSight = () => {
 
 const deleteFile = () => {
   console.log('deleting file', props.file.id)
-  app.files.value = app.files.value.filter((file) => file.id !== props.file.id)
+
+  app.files.value.splice(app.files.value.findIndex(file => file.id === props.file.id), 1)
+  deleteAudioFile(props.file.id)
 }
 </script>
