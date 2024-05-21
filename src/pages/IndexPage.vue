@@ -27,14 +27,8 @@
       
       <div class="col-12 row q-col-gutter-y-md">
         <audio-file class="col-12" v-for="file of app.files.value"
-          :key="file.url"
-          :id="file.id"
-          :src="file.url"
-          :url="file.id"
-          :audio="file.audio"
-          :file="file.file"
-          :transcript="file.transcript"
-          :loading="file.loading"
+          :key="file.id"
+          :file="file"
         />
       </div>
     </div>

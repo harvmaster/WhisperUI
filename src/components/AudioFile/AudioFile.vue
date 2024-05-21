@@ -18,7 +18,7 @@
           </div>
   
           <div class="col row">
-            <audio-track class="col-12" :duration="audio.duration" :waveform="audio.waveform" :position="position" :seek="seek" />
+            <audio-track v-if="file.audio" class="col-12" :duration="file.audio?.duration" :waveform="file.audio?.waveform" :position="position" :seek="seek" />
           </div>
 
           <div class="col-auto">
@@ -32,11 +32,11 @@
               }}
               /
               {{ 
-                Math.floor(audio.duration / 60)
+                Math.floor((file.audio?.duration || 0) / 60)
               }}:{{
-                Math.floor(audio.duration % 60) < 10 ? '0' : ''
+                Math.floor((file.audio?.duration || 0) % 60) < 10 ? '0' : ''
               }}{{
-                Math.floor(audio.duration % 60)
+                Math.floor((file.audio?.duration || 0) % 60)
               }}
             </span>
           </div>
@@ -52,10 +52,10 @@
         <div class="col-12 q-px-md row" :style="fileNameHeight">
           <span class="col-12 self-center text-grey-10">
             <span class="text-grey-9 text-weight-medium text-h6 ">
-              {{ file.name }}
+              {{ file.file.name }}
             </span>
             <span class="text-caption">
-              ({{ (file.size/1024/1024).toPrecision(2) }} MB)
+              ({{ (file.file.size/1024/1024).toPrecision(2) }} MB)
             </span>
           </span>
         </div>
@@ -173,26 +173,26 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { app } from 'src/boot/app';
-import { UploadedAudioFile } from 'src/types';
+import AudioFile from 'src/core/AudioFile';
 
 import AudioTrack from './AudioTrack.vue'
 
 import useAudioPlayer from 'src/composables/useAudioPlayer';
 
-export type AudioFileProps = UploadedAudioFile & {
-  src: string
+export type AudioFileProps = {
+  file: AudioFile;
 }
 
 const props = defineProps<AudioFileProps>()
 
-console.log('Audio File Id: ', props.id)
-console.log('Audio file loading: ', props.loading)
-console.log('Audio File url: ', props.url)
+console.log('Audio File Id: ', props.file.id)
+console.log('Audio file loading: ', props.file.loading)
+console.log('Audio File url: ', props.file.src)
 // console.log(exampleTranscript)
 
 // const transcript = ref(exampleTranscript)
 const transcript = computed(() => {
-  return props.transcript
+  return props.file.transcript
 })
 
 const {
@@ -203,7 +203,7 @@ const {
   isPlaying,
   status,
   position,
-} = useAudioPlayer(props.url)
+} = useAudioPlayer(props.file.src)
 
 const audioFileHeader = ref<HTMLElement | null>(null)
 const audioFileContent = ref<HTMLElement | null>(null)
@@ -262,7 +262,7 @@ const keepInSight = () => {
 }
 
 const deleteFile = () => {
-  console.log('deleting file', props.id)
-  app.files.value = app.files.value.filter((file) => file.id !== props.id)
+  console.log('deleting file', props.file.id)
+  app.files.value = app.files.value.filter((file) => file.id !== props.file.id)
 }
 </script>

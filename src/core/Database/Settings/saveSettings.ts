@@ -8,7 +8,11 @@ export default async function saveSettings(settings: Database__Settings): Promis
   const tx = db.db.transaction("settings", "readwrite");
   const store = tx.objectStore("settings");
 
-  await store.put(settings, settingsId);
+  const formattedSettings = {
+    id: settingsId,
+    ...settings,
+  }
+  await store.put(formattedSettings);
 
   await tx.done;
 }

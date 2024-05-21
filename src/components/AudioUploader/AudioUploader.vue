@@ -31,13 +31,8 @@
 
 <script setup lang="ts">
 import { app } from 'boot/app'
-import {  UploadedAudioFile } from 'src/types';
 
-import createWaveforms from 'src/lib/Audio/createWaveforms';
-import getCombinedAverageWaveform from 'src/lib/Audio/getCombinedAverageWaveform';
-import getAverageWaveforms from 'src/lib/Audio/getAverageWaveforms';
-import getAudioDuration from 'src/lib/Audio/getAudioDuration';
-import transcribeAudio from 'src/composables/transcribeAudio';
+import AudioFile from 'src/core/AudioFile';
 import generateId from 'src/composables/generateId';
 
 const openFileBrowser = () => {
@@ -45,60 +40,22 @@ const openFileBrowser = () => {
   fileInput.type = 'file';
   fileInput.accept = 'audio/*';
   fileInput.onchange = async (e) => {
-    const file = e.target.files[0];
+    const file: File = e.target.files[0];
 
-    const trascriptPromise = transcribeAudio(file);
-
-    const start = performance.now()
-    const duration = await getAudioDuration(file);
-
-    const afterDuration = performance.now();
-
-    const { waveforms, sampleRate } = await createWaveforms(file);
-
-    const afterWaveforms = performance.now();
-    
-    const averaged = await getCombinedAverageWaveform(waveforms, sampleRate, duration/2000);
-
-    const afterAveraged = performance.now();
-
-    console.log('Duration:', afterDuration - start);
-    console.log('Waveforms:', afterWaveforms - afterDuration);
-    console.log('Averaged:', afterAveraged - afterWaveforms);
-    // console.log(averaged)
-
-    const max = Math.max(...averaged);
-    const min = Math.min(...averaged);
-    const range = max - min;
-
-    const scaled = averaged.map((value) => {
-      return (value - min) / range;
+    const id = generateId();
+    const audioFile = new AudioFile({
+      id,
+      file
     });
+    app.files.value.push(audioFile)
 
-    // console.log(scaled);
-
-    console.log(file);
-    console.log('generating id', generateId())
+    const appAudioFile = app.files.value.find((file) => file.id === id);
+    if (!appAudioFile) return;
+    
+    appAudioFile.transcribe()
+    appAudioFile.getAudioInformation()
 
     
-    const audioFile = {
-      id: generateId(),
-      file,
-      url: URL.createObjectURL(file),
-      audio: {
-        duration,
-        waveform: {
-          waveforms: scaled,
-          sampleRate,
-        }
-      },
-      transcript: null,
-      loading: true
-    } as UploadedAudioFile;
-    app.files.value.push(audioFile);
-
-    const transcript = await trascriptPromise;
-    audioFile.transcript = transcript;
   };
   fileInput.click();
 }

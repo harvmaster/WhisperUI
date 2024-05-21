@@ -1,8 +1,12 @@
 import { reactive, ref, watch } from 'vue';
-import { UploadedAudioFile, Settings } from 'src/types';
+import { Settings } from 'src/types';
+
+import { saveAudioFiles, getAudioFiles } from 'src/core/Database/audioFile';
+import { saveSettings, getSettings } from 'src/core/Database/Settings';
+import { AudioFile } from 'src/core/AudioFile';
 
 class App {
-  readonly files = reactive<{ value: UploadedAudioFile[] }>({ value: [] });
+  readonly files = reactive<{ value: AudioFile[] }>({ value: [] });
   readonly settings = reactive<{ value: Settings }>({ value: { 
     endpoint: '',
     encode: true,
@@ -11,33 +15,34 @@ class App {
     timestamps: true
   } });
 
-  loadApp () {
-    const files = localStorage.getItem('files');
-    if (files) {
-      this.files.value = JSON.parse(files);
-    }
-    console.log(this.files.value);  
+  async loadApp () {
+    this.settings.value = await getSettings();
 
-    const settings = localStorage.getItem('settings');
-    if (settings) {
-      this.settings.value = JSON.parse(settings);
-    }
+    this.files.value = await getAudioFiles();
+    this.files.value.forEach((audioFile) => {
+      if (!audioFile.audio) audioFile.getAudioInformation()
+      // if (!audioFile.transcript) audioFile.transcribe()
+    })
   }
 
   initListeners () {
     watch(this.files, () => {
-      this.files.value[0].file.
-      // localStorage.setItem('files', JSON.stringify(this.files.value));
+      saveAudioFiles(this.files.value);
     })
 
     watch(this.settings, () => {
-      // localStorage.setItem('settings', JSON.stringify(this.settings.value));
+      saveSettings(this.settings.value);
     })
   }
 }
 
 const app = new App();
-app.loadApp();
-app.initListeners();
+
+const initApp = async () => {
+  await app.loadApp();
+  app.initListeners();
+}
+
+initApp();
 
 export { app }

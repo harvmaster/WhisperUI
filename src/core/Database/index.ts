@@ -2,6 +2,9 @@ import { openDB, IDBPDatabase } from 'idb'
 
 import { AudioInformation, TranscribedAudio } from 'src/types'
 
+export * as AudioFile from './audioFile'
+export * as Settings from './Settings'
+
 interface DatabaseSchema {
   audioFiles: {
     id: string;

@@ -40,8 +40,10 @@ export type UploadedAudioFile = {
   id: string;
   file: File;
   url: string;
-  audio: AudioInformation;
-  transcript: TranscribedAudio | null;
+
+  audio?: AudioInformation;
+  transcript?: TranscribedAudio;
+  
   loading: boolean;
 }
 
@@ -55,4 +57,10 @@ export type Settings = {
 
 export type Database__Settings = Settings
 
-export type Database__AudioFile = Omit<UploadedAudioFile, 'url' | 'loading'>
+export type Database__AudioFile = Omit<UploadedAudioFile, 'url' | 'loading' | 'file'> & {
+  file: {
+    name: string;
+    type: string;
+    data: ArrayBuffer;
+  }
+}
