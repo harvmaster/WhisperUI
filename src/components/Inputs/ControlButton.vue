@@ -1,5 +1,5 @@
 <template>
-  <button class="control-button row" :style="buttonStyles" @click="onClick">
+  <button class="control-button row relative" :style="buttonStyles" @click="onClick">
     <slot>
       <!-- Default slot content -->
       <div class="control-button-icon col-12 self-center row items-center">
@@ -7,6 +7,9 @@
           <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" :style="`color: ${buttonStyles['--color']}`"/>
         </Transition>
       </div>
+
+    </slot>
+    <slot name="after">
 
     </slot>
   </button>
@@ -18,7 +21,7 @@
   height: fit-content;
   padding: 0.4em;
   border-radius: 25%;
-  aspect-ratio: 1/1;
+  // aspect-ratio: 1/1;
   cursor: pointer;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
 

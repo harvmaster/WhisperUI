@@ -22,10 +22,19 @@
         <ControlButton @click="() => relativeSeek(10)" icon="forward_10" />
       </div>
       <div class="col-auto">
-        <ControlButton @click="() => toggleStatus()" icon="volume_up" />
-      </div>
-      <div class="col-auto">
-        <ControlButton @click="toggleStatus" :icon="statusIcon" bg-color="blue-3" text-color="blue-9" />
+        <ControlButton @click="toggleVolume" icon="volume_up">
+          <template v-slot:after>
+            <div class="absolute-top" v-if="showVolume">
+              <ControlButton @click="toggleVolume" icon="volume_up" bg-color="blue-3" text-color="blue-9" style="border-radius: 0;">
+                <template v-slot:after>
+                  <div class="">
+                    <q-slider v-model="vol" class="volume-slider" :class="showVolume ? 'active-slider' : ''" vertical  :min="0" :max="1" :step="0.01" />
+                  </div>
+                </template>
+              </ControlButton>
+            </div>
+          </template>
+        </ControlButton>
       </div>
     </div>
 
@@ -33,7 +42,18 @@
 </template>
 
 <style lang="scss" scoped>
-
+.volume-slider {
+  width: 1em;
+  // height: 5em;
+  margin: 0.5em 0;
+  transition: height 0.25s;
+  // transform: scaleY(0);
+  height: 0;
+}
+.active-slider {
+  // transform: scaleY(1);
+  height: 5em;
+}
 </style>
 
 <script setup lang="ts">
@@ -68,4 +88,8 @@ const relativeSeek = (seconds: number) => {
 const statusIcon = computed(() => {
   return props.status === PlayerStatus.PAUSED ? 'pause' : 'play_arrow'
 })
+
+const vol = ref(0.5)
+const showVolume = ref(false)
+const toggleVolume = () => showVolume.value = !showVolume.value
 </script>
