@@ -33,6 +33,7 @@
 .control-button:active {
   transform: scale(0.95);
 }
+
 .control-button-icon {
   min-height: 0;
   height: fit-content;
@@ -79,12 +80,9 @@ export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButt
 const props = defineProps<ControlButtonProps>()
 
 const currentIcon = computed(() => {
-  if (props.state != undefined) {
-    console.log('props.icon', props.icon)
+  if (Array.isArray(props.icon)) { // Would rather do if (props.state != undefined) but TS doesn't like that
     return props.icon.find((icon) => icon.key === props.state)?.icon || ''
   }
-
-  console.log('props.icon', props.icon)
   return props.icon
 })
 
