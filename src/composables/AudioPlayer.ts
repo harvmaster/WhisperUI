@@ -12,6 +12,7 @@ const src = ref<string>('')
 const status = ref<PlayerStatus>(PlayerStatus.PAUSED)
 
 const position = ref(0)
+const volume = ref(100)
 
 const seek = (pos: number) => {
   position.value = pos
@@ -58,17 +59,27 @@ setInterval(() => {
   }
 }, 100)
 
+const setVolume = (vol: number) => {
+  if (vol < 0) vol = 0
+  if (vol > 100) vol = 100
+
+  volume.value = vol
+  player.value.volume = vol / 100
+}
+
 export const getAudioPlayer = () => {
   return {
     player,
     src,
     status,
     position,
+    volume,
 
     seek,
     play,
     pause,
-    toggle
+    toggle,
+    setVolume
   }
 }
 

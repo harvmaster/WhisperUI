@@ -32,16 +32,20 @@ export default function useAudioPlayer(src: string) {
     return isPlaying.value ? PlayerStatus.PLAYING : PlayerStatus.PAUSED
   })
 
-
-
   const position = ref<number>(0)
   let positionWatcher: WatchStopHandle | null = null
+  
+  const volume = ref<number>(100)
+  let volumeWatcher: WatchStopHandle | null = null
 
   watch(player.src, () => {
     // If the src changes, start watching the position
     if (player.src.value == src) {
       if (!positionWatcher) {
         positionWatcher = createPositionWatcher()
+      }
+      if (!volumeWatcher) {
+        volumeWatcher = createVolumeWatcher()
       }
     }
 
@@ -51,6 +55,10 @@ export default function useAudioPlayer(src: string) {
         positionWatcher()
         positionWatcher = null
       }
+      if (volumeWatcher) {
+        volumeWatcher()
+        volumeWatcher = null
+      }
     }
   })
 
@@ -58,6 +66,14 @@ export default function useAudioPlayer(src: string) {
     return watch(player.position, (newPosition) => {
       if (player.src.value == src) {
         position.value = newPosition
+      }
+    })
+  }
+
+  const createVolumeWatcher = () => {
+    return watch(player.volume, (newVolume) => {
+      if (player.src.value == src) {
+        volume.value = newVolume
       }
     })
   }
