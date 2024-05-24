@@ -8,7 +8,8 @@
    -->
   <div class="row">
     <div class="col-auto">
-      <ControlButton @click="pause" icon="pause" color="blue-4" />
+      <ControlButton @click="pause" icon="pause" bg-color="blue-3" />
+      <ControlButton @click="pause" icon="pause" />
     </div>
   </div>
 </template>
