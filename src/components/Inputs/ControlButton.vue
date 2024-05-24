@@ -4,7 +4,7 @@
       <!-- Default slot content -->
       <div class="control-button-icon col-12 self-center row items-center">
         <Transition name="fade" mode="out-in">
-          <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" />
+          <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" :style="`color: ${buttonStyles['--color']}`"/>
         </Transition>
       </div>
 
@@ -44,7 +44,7 @@
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.25s;
+  transition: opacity 0.15s;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
@@ -73,6 +73,7 @@ export type StaticControlButtonProps = {
 export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButtonProps) & {
   textColor?: string;
   bgColor?: string;
+  hoverBgColor?: string;
 
   onClick: () => void;
 }
@@ -87,17 +88,18 @@ const currentIcon = computed(() => {
 })
 
 const getColor = (color?: string) => color ? colors.getPaletteColor(color) : undefined
+
 const buttonStyles = computed(() => {
   const bgColor = getColor(props.bgColor)
   
-  const borderColor = bgColor ? colors.lighten(bgColor || '', -5) : '#454545'
-  const border = `2px solid ${borderColor}`
+  const borderColor = bgColor ? colors.lighten(bgColor || '', -5) : '#c7c7c7'
+  const border = `1px solid ${borderColor}`
   
   const backgroundColor = bgColor || 'transparent'
-  const hoverBackgroundColor = bgColor ? colors.lighten(bgColor || '', -5) : '#e3e3e3'
+  const hoverBackgroundColor = getColor(props.hoverBgColor) || (bgColor ? colors.lighten(bgColor || '', -5) : '#e3e3e3')
 
-  const textBlack = '#212121'
-  const color = props.textColor || textBlack
+  const textBlack = '#5a5a5a'
+  const color = getColor(props.textColor) || textBlack
 
   return {
     '--border': border,
