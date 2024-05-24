@@ -8,7 +8,13 @@
 
     <!-- Controls & Meta -->
     <div class="col-12 row">
-      <audio-file-controls class="col-12" :play="play" :pause="pause" :seek="seek" />
+      <audio-file-controls class="col-12" 
+        :play="play" 
+        :pause="pause" 
+        :seek="seek" 
+        :status="status" 
+        :position="position"
+      />
     </div>
 
     <!-- tracks -->

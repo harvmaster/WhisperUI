@@ -20,6 +20,7 @@
   border-radius: 25%;
   aspect-ratio: 1/1;
   cursor: pointer;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
 
   color: var(--text-color);
   border: var(--border);
