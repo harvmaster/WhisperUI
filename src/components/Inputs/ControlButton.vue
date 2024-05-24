@@ -1,10 +1,10 @@
 <template>
-  <button class="control-button row" :style="buttonStyles">
+  <button class="control-button row" :style="buttonStyles" @click="onClick">
     <slot>
       <!-- Default slot content -->
       <div class="control-button-icon col-12 self-center row items-center">
         <Transition name="fade" mode="out-in">
-          <q-icon class="col-12 self-center fit" :key="icon" :name="icon" />
+          <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" />
         </Transition>
       </div>
 
@@ -14,7 +14,6 @@
 
 <style lang="scss" scoped>
 .control-button {
-  // width: fit-content;
   min-height: 0;
   height: fit-content;
   padding: 0.4em;
@@ -25,12 +24,16 @@
   color: var(--text-color);
   border: var(--border);
   background-color: var(--bg-color);
+
+  transition: transform 0.25s, background-color 0.25s;
 }
 .control-button:hover {
   background-color: var(--hover_bg-color);
 }
+.control-button:active {
+  transform: scale(0.95);
+}
 .control-button-icon {
-  // width: fit-content;
   min-height: 0;
   height: fit-content;
   aspect-ratio: 1;
@@ -51,8 +54,22 @@
 import { computed } from 'vue';
 import { colors } from 'quasar';
 
-export type ControlButtonProps = {
+export type StatefulIcon = {
   icon: string;
+  key: string;
+}
+
+export type StatefulControlButtonProps = {
+  icon: StatefulIcon[];
+  state?: string;
+}
+
+export type StaticControlButtonProps = {
+  icon: string;
+  state: never;
+}
+
+export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButtonProps) & {
   textColor?: string;
   bgColor?: string;
 
@@ -61,8 +78,17 @@ export type ControlButtonProps = {
 
 const props = defineProps<ControlButtonProps>()
 
-const getColor = (color?: string) => color ? colors.getPaletteColor(color) : undefined
+const currentIcon = computed(() => {
+  if (props.state != undefined) {
+    console.log('props.icon', props.icon)
+    return props.icon.find((icon) => icon.key === props.state)?.icon || ''
+  }
 
+  console.log('props.icon', props.icon)
+  return props.icon
+})
+
+const getColor = (color?: string) => color ? colors.getPaletteColor(color) : undefined
 const buttonStyles = computed(() => {
   const bgColor = getColor(props.bgColor)
   
@@ -70,7 +96,7 @@ const buttonStyles = computed(() => {
   const border = `2px solid ${borderColor}`
   
   const backgroundColor = bgColor || 'transparent'
-  const hoverBackgroundColor = bgColor ? colors.lighten(bgColor || '', -5) : '#454545'
+  const hoverBackgroundColor = bgColor ? colors.lighten(bgColor || '', -5) : '#e3e3e3'
 
   const textBlack = '#212121'
   const color = props.textColor || textBlack
@@ -82,7 +108,4 @@ const buttonStyles = computed(() => {
     '--color': color
   }
 })
-
-
-// const backgroundColor
 </script>

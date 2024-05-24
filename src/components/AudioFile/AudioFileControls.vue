@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-auto">
       <ControlButton @click="pause" icon="pause" bg-color="blue-3" />
-      <ControlButton @click="pause" icon="pause" />
+      <ControlButton @click="changeIcon" :icon="icon" />
     </div>
   </div>
 </template>
@@ -19,6 +19,7 @@
 </style>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
 
 export type AudioFileControlsProps = {
@@ -34,4 +35,10 @@ export type AudioFileControlsProps = {
 }
 
 const props = defineProps<AudioFileControlsProps>()
+
+const icon = ref('pause')
+const changeIcon = () => {
+  console.log('icon', icon.value)
+  icon.value = icon.value === 'play_arrow' ? 'pause' : 'play_arrow'
+}
 </script>
