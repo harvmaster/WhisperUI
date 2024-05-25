@@ -1,18 +1,40 @@
 <template>
-  <button class="volume-button row" @click="expand">
+  <control-button
+    icon="volume_up"
+    @click="expand"
+  >
+
+    <template v-slot:after>
+      <div class="absolute-top" v-if="expanded">  
+        <control-button
+          icon="volume_up"
+          @click.prevent.stop="expand"
+        >
+          <template v-slot:after>
+            <div class="volume-slider col-auto row" :class="{ 'active-slider': expanded }">
+              <q-slider class="" v-model="volume" :min="0" :max="1" :step="0.01" vertical />
+            </div>
+          </template>
+        </control-button>
+      </div>
+    </template>
+
+  </control-button>
+
+  <!-- <button class="volume-button row" @click="expand">
     <div class="col-12 row">
 
-      <!-- icon -->
+      icon
       <div class="col-auto">
-        <q-icon class="volume-slider-icon" />
+        <q-icon class="volume-slider-icon" name="volume_up" />
       </div>
 
-      <!-- volume slider -->
+      volume slider
       <div v-if="expanded" class="volume-slider col-auto row" :class="{ 'active-slider': expanded }">
         <q-slider class="full-height" v-model="volume" min="0" max="1" step="0.01" />
       </div>
     </div>
-  </button>
+  </button> -->
 </template>
 
 <style lang="scss" scoped>
@@ -42,6 +64,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import ControlButton from './ControlButton.vue';
 
 const volume = ref(0.5)
 

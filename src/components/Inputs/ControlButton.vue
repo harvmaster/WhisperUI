@@ -20,7 +20,7 @@
   min-height: 0;
   height: fit-content;
   padding: 0.4em;
-  border-radius: 25%;
+  border-radius: 0.5em;
   // aspect-ratio: 1/1;
   cursor: pointer;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
