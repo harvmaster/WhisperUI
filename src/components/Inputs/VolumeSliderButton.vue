@@ -1,17 +1,25 @@
 <template>
-  <control-button
-    icon="volume_up"
-    @click="expand"
-    class="row"
-  >
-    <template v-slot:after>
-      <q-slider v-model="volume" class="volume-slider col-12" :class="expanded ? 'active-slider' : ''"  :min="0" :max="1" :step="0.01" />
-    </template>
-  </control-button>
+  <button class="control-button row relative" :style="buttonStyles" @click="onClick">
+    <div class="col-12 row">
+
+      <!-- icon -->
+      <div class="col-auto">
+        <q-icon class="volume-slider-icon" />
+      </div>
+
+      <!-- volume slider -->
+      <div v-if="expanded" class="volume-slider col-auto row" :class="{ 'active-slider': expanded }">
+        <q-slider v-model="volume" min="0" max="1" step="0.01" />
+      </div>
+    </div>
+  </button>
 </template>
 
 <style lang="scss" scoped>
-
+.volume-slider-icon {
+  height: fit-content;
+  aspect-ratio: 1;
+}
 </style>
 
 <script setup lang="ts">
