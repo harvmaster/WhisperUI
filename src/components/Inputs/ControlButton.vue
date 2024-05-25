@@ -81,7 +81,7 @@ export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButt
   bgColor?: string;
   hoverBgColor?: string;
 
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const props = defineProps<ControlButtonProps>()

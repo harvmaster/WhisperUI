@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-auto">
-      <q-select model-value="speed" @change="setSpeed" :options="speedOptions" bg-color="blue-3" text-color="blue-9" />
+      <speed-control-button icon="speed" :options="speedOptions" :speed="testSpeed" :setSpeed="props.setSpeed" options-hover-bg-color="blue-2" />
     </div>
 
   </div>
@@ -48,6 +48,7 @@ import { PlayerStatus } from 'src/composables/AudioPlayer'
 
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
 import VolumeSliderButton from 'src/components/Inputs/VolumeSliderButton.vue';
+import SpeedControlButton from 'src/components/Inputs/SpeedControlButton.vue';
 
 export type AudioFileControlsProps = {
   play: () => void;
@@ -76,6 +77,7 @@ const statusIcon = computed(() => {
   return props.status === PlayerStatus.PAUSED ? 'pause' : 'play_arrow'
 })
 
+const testSpeed = ref(1)
 const speedOptions = computed(() => {
   return [
     { label: '0.5x', value: 0.5 },
