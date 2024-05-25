@@ -6,7 +6,7 @@
 
     <template v-slot:after>
       <transition name="expand_x">
-        <div v-if="expanded" class="volume-slider row self-center items-center q-px-sm" @click.prevent.stop="() => {}"> 
+        <div v-if="expanded" class="volume-slider row self-center items-center q-px-md" @click.prevent.stop="() => {}"> 
           <q-slider class="slider self-center col-12" v-model="volume" :min="0" :max="100" :step="1" label />
         </div>
       </transition>
@@ -21,7 +21,7 @@
 }
 .volume-slider {
   height: 1em;
-  width: 5em;
+  width: 7em;
   transform: translateY(-50%);
 }
 

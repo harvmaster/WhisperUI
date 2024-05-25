@@ -10,6 +10,7 @@
     <div class="col-auto">
       <ControlButton @click="toggleStatus" :icon="statusIcon" bg-color="blue-3" text-color="blue-9" />
     </div>
+
     <div class="col-auto q-px-sm">
       <q-separator vertical class="full-height"/>
     </div>
@@ -24,6 +25,14 @@
       <div class="col-auto">
         <volume-slider-button />
       </div>
+    </div>
+
+    <div class="col-auto q-px-sm">
+      <q-separator vertical class="full-height"/>
+    </div>
+
+    <div class="col-auto">
+      <ControlButton @click="toggleStatus" icon="speed" bg-color="blue-3" text-color="blue-9" />
     </div>
 
   </div>
@@ -77,8 +86,4 @@ const relativeSeek = (seconds: number) => {
 const statusIcon = computed(() => {
   return props.status === PlayerStatus.PAUSED ? 'pause' : 'play_arrow'
 })
-
-const vol = ref(0.5)
-const showVolume = ref(false)
-const toggleVolume = () => showVolume.value = !showVolume.value
 </script>
