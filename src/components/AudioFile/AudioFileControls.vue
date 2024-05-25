@@ -32,25 +32,14 @@
     </div>
 
     <div class="col-auto">
-      <ControlButton @click="toggleStatus" icon="speed" bg-color="blue-3" text-color="blue-9" />
+      <q-select model-value="speed" @change="setSpeed" :options="speedOptions" bg-color="blue-3" text-color="blue-9" />
     </div>
 
   </div>
 </template>
 
 <style lang="scss" scoped>
-.volume-slider {
-  width: 1em;
-  // height: 5em;
-  margin: 0.5em 0;
-  transition: height 0.25s;
-  // transform: scaleY(0);
-  height: 0;
-}
-.active-slider {
-  // transform: scaleY(1);
-  height: 5em;
-}
+
 </style>
 
 <script setup lang="ts">
@@ -85,5 +74,14 @@ const relativeSeek = (seconds: number) => {
 
 const statusIcon = computed(() => {
   return props.status === PlayerStatus.PAUSED ? 'pause' : 'play_arrow'
+})
+
+const speedOptions = computed(() => {
+  return [
+    { label: '0.5x', value: 0.5 },
+    { label: '1x', value: 1 },
+    { label: '1.5x', value: 1.5 },
+    { label: '2x', value: 2 },
+  ]
 })
 </script>
