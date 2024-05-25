@@ -1,8 +1,8 @@
 <template>
-  <button class="control-button row relative" :style="buttonStyles" @click="onClick">
+  <button class="control-button relative" :style="buttonStyles" @click="onClick">
     <slot>
       <!-- Default slot content -->
-      <div class="control-button-icon col-12 self-center row items-center">
+      <div class="control-button-icon self-center row items-center">
         <Transition name="fade" mode="out-in">
           <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" :style="`color: ${buttonStyles['--color']}`"/>
         </Transition>
@@ -24,6 +24,8 @@
   // aspect-ratio: 1/1;
   cursor: pointer;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
 
   color: var(--text-color);
   border: var(--border);

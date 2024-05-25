@@ -5,18 +5,11 @@
   >
 
     <template v-slot:after>
-      <div class="absolute-top" v-if="expanded">  
-        <control-button
-          icon="volume_up"
-          @click.prevent.stop="expand"
-        >
-          <template v-slot:after>
-            <div class="volume-slider col-auto row" :class="{ 'active-slider': expanded }">
-              <q-slider class="" v-model="volume" :min="0" :max="1" :step="0.01" vertical />
-            </div>
-          </template>
-        </control-button>
-      </div>
+      <transition name="expand_x">
+        <div v-if="expanded" class="volume-slider row self-center items-center q-pl-sm">
+          <q-slider class="slider self-center col-12" v-model="volume" :min="0" :max="1" :step="0.01" />
+        </div>
+      </transition>
     </template>
 
   </control-button>
@@ -38,27 +31,22 @@
 </template>
 
 <style lang="scss" scoped>
-.volume-button {
-  min-height: 0;
-  height: fit-content;
-  padding: 0.4em;
-  border-radius: 0.5em;
-  // aspect-ratio: 1/1;
-  cursor: pointer;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-
-  color: var(--text-color);
-  // border: var(--border);
-  border: 1px solid #c7c7c7;
-  background-color: var(--bg-color);
-
-  transition: transform 0.25s, background-color 0.25s;
+.slider {
+  height: 1em;
+}
+.volume-slider {
+  height: 1em;
+  width: 5em;
+  transform: translateY(-50%);
 }
 
-.volume-slider-icon {
-  height: fit-content;
-  aspect-ratio: 1;
-  font-size: 1.5em;
+.expand_x-enter-active, .expand_x-leave-active {
+  transition: all 0.25s;
+}
+.expand_x-enter-from, .expand_x-leave-to {
+  width: 0em;
+  opacity: 0;
+  padding: 0;
 }
 </style>
 
