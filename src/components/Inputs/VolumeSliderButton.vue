@@ -1,33 +1,18 @@
 <template>
   <control-button
-    icon="volume_up"
+    :icon="volumeIcon"
     @click="expand"
   >
 
     <template v-slot:after>
       <transition name="expand_x">
-        <div v-if="expanded" class="volume-slider row self-center items-center q-pl-sm">
-          <q-slider class="slider self-center col-12" v-model="volume" :min="0" :max="1" :step="0.01" />
+        <div v-if="expanded" class="volume-slider row self-center items-center q-px-sm" @click.prevent.stop="() => {}"> 
+          <q-slider class="slider self-center col-12" v-model="volume" :min="0" :max="100" :step="1" label />
         </div>
       </transition>
     </template>
 
   </control-button>
-
-  <!-- <button class="volume-button row" @click="expand">
-    <div class="col-12 row">
-
-      icon
-      <div class="col-auto">
-        <q-icon class="volume-slider-icon" name="volume_up" />
-      </div>
-
-      volume slider
-      <div v-if="expanded" class="volume-slider col-auto row" :class="{ 'active-slider': expanded }">
-        <q-slider class="full-height" v-model="volume" min="0" max="1" step="0.01" />
-      </div>
-    </div>
-  </button> -->
 </template>
 
 <style lang="scss" scoped>
@@ -51,15 +36,21 @@
 </style>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ControlButton from './ControlButton.vue';
 
-const volume = ref(0.5)
+const volume = ref(50)
 
 const expanded = ref(false)
 const expand = () => {
   expanded.value = !expanded.value
 }
 
+const volumeIcon = computed(() => {
+  if (volume.value === 0) return 'volume_off'
+  if (volume.value < 33) return 'volume_mute'
+  if (volume.value < 66) return 'volume_down'
+  return 'volume_up'
+})
 
 </script>
