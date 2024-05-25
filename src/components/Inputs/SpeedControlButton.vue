@@ -15,7 +15,7 @@
     <template v-slot:after>
       <transition name="fade">
         <div v-if="expanded" class="row absolute-bottom options-container" :style="optionStyles">
-          <div class="col-12 option" v-for="option in options" :key="option.value">
+          <div class="col-12 option" v-for="option in options" :key="option.value" @click="() => setSpeed(option.value)">
             {{ option.label }}
           </div>
         </div>
