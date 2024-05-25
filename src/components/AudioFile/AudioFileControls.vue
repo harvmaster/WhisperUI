@@ -23,7 +23,7 @@
         <ControlButton @click="() => relativeSeek(10)" icon="forward_10" />
       </div>
       <div class="col-auto">
-        <volume-slider-button />
+        <volume-slider-button :setVolume="setVolume" :volume="volume" />
       </div>
     </div>
 
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-auto">
-      <speed-control-button icon="speed" :options="speedOptions" :speed="testSpeed" :setSpeed="props.setSpeed" options-hover-bg-color="blue-2" />
+      <speed-control-button icon="speed" :options="speedOptions" :speed="speed" :setSpeed="setSpeed" options-hover-bg-color="blue-2" />
     </div>
 
   </div>
@@ -74,10 +74,9 @@ const relativeSeek = (seconds: number) => {
 }
 
 const statusIcon = computed(() => {
-  return props.status === PlayerStatus.PAUSED ? 'pause' : 'play_arrow'
+  return props.status === PlayerStatus.PLAYING ? 'pause' : 'play_arrow'
 })
 
-const testSpeed = ref(1)
 const speedOptions = computed(() => {
   return [
     { label: '0.5x', value: 0.5 },

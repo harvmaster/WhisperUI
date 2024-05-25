@@ -67,6 +67,10 @@ const setVolume = (vol: number) => {
   player.value.volume = vol / 100
 }
 
+const setPlaybackRate = (rate: number) => {
+  player.value.playbackRate = rate
+}
+
 export const getAudioPlayer = () => {
   return {
     player,
@@ -79,7 +83,8 @@ export const getAudioPlayer = () => {
     play,
     pause,
     toggle,
-    setVolume
+    setVolume,
+    setPlaybackRate
   }
 }
 

@@ -5,7 +5,7 @@
   >
     <template v-slot:default>
       <div class="col-12 row self-center label-container">
-        <span class="col-auto text-weight-bold q-px-sm">{{ speed?.toPrecision(1) }}x</span>
+        <span class="col-auto text-weight-bold q-px-sm">{{ speed?.toString() }}x</span>
         <div class="col-auto row items-center label-icon">
           <q-icon name="expand_more" />
         </div>

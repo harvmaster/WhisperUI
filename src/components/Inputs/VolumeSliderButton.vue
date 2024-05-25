@@ -7,7 +7,7 @@
     <template v-slot:after>
       <transition name="expand_x">
         <div v-if="expanded" class="volume-slider row self-center items-center q-px-md" @click.prevent.stop="() => {}"> 
-          <q-slider class="slider self-center col-12" v-model="volume" :min="0" :max="100" :step="1" label />
+          <q-slider class="slider self-center col-12" v-model="model" :min="0" :max="100" :step="1" label />
         </div>
       </transition>
     </template>
@@ -36,10 +36,20 @@
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import ControlButton from './ControlButton.vue';
 
-const volume = ref(50)
+export type VolumeSliderButtonProps = {
+  volume: number;
+  setVolume: (volume: number) => void;
+}
+
+const props = defineProps<VolumeSliderButtonProps>()
+const model = ref(props.volume)
+
+watch(model, (value) => {
+  props.setVolume(value)
+})
 
 const expanded = ref(false)
 const expand = () => {
@@ -47,9 +57,9 @@ const expand = () => {
 }
 
 const volumeIcon = computed(() => {
-  if (volume.value === 0) return 'volume_off'
-  if (volume.value < 33) return 'volume_mute'
-  if (volume.value < 66) return 'volume_down'
+  if (props.volume === 0) return 'volume_off'
+  if (props.volume < 33) return 'volume_mute'
+  if (props.volume < 66) return 'volume_down'
   return 'volume_up'
 })
 

@@ -7,6 +7,8 @@ export default function useAudioPlayer(src: string) {
   const play = () => {
     player.seek(position.value)
     player.play(src)
+    player.setPlaybackRate(speed.value)
+    player.setVolume(volume.value)
   }
 
   const pause = () => {
@@ -32,10 +34,24 @@ export default function useAudioPlayer(src: string) {
     return isPlaying.value ? PlayerStatus.PLAYING : PlayerStatus.PAUSED
   })
 
+  const speed = ref<number>(1)
+  const setSpeed = (spd: number) => {
+    speed.value = spd
+    if (isActive.value) {
+      player.setPlaybackRate(spd)
+    }
+  }
+
   const position = ref<number>(0)
   let positionWatcher: WatchStopHandle | null = null
-  
+
   const volume = ref<number>(100)
+  const setVolume = (vol: number) => {
+    volume.value = vol
+    if (isActive.value) {
+      player.setVolume(vol)
+    }
+  }
   let volumeWatcher: WatchStopHandle | null = null
 
   watch(player.src, () => {
@@ -87,6 +103,12 @@ export default function useAudioPlayer(src: string) {
     status,
     position,
 
+    setVolume,
+    volume,
+    
+    setSpeed,
+    speed,
+    
     player: player.player
   }
 }

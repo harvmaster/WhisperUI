@@ -14,6 +14,12 @@
         :seek="seek" 
         :status="status" 
         :position="position"
+        
+        :volume="volume"
+        :setVolume="setVolume"
+
+        :speed="speed"
+        :setSpeed="setSpeed"
       />
     </div>
 
@@ -57,6 +63,10 @@ const {
   isPlaying,
   status,
   position,
+  volume,
+  setVolume,
+  speed,
+  setSpeed,
 } = useAudioPlayer(props.file.src)
 
 
