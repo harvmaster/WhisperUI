@@ -22,19 +22,7 @@
         <ControlButton @click="() => relativeSeek(10)" icon="forward_10" />
       </div>
       <div class="col-auto">
-        <ControlButton @click="toggleVolume" icon="volume_up">
-          <template v-slot:after>
-            <div class="absolute-top" v-if="showVolume">
-              <ControlButton @click="toggleVolume" icon="volume_up" bg-color="blue-3" text-color="blue-9" style="border-radius: 0;">
-                <template v-slot:after>
-                  <div class="">
-                    <q-slider v-model="vol" class="volume-slider" :class="showVolume ? 'active-slider' : ''" vertical  :min="0" :max="1" :step="0.01" />
-                  </div>
-                </template>
-              </ControlButton>
-            </div>
-          </template>
-        </ControlButton>
+        <volume-slider-button />
       </div>
     </div>
 
@@ -61,6 +49,7 @@ import { computed, ref } from 'vue'
 import { PlayerStatus } from 'src/composables/AudioPlayer'
 
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
+import VolumeSliderButton from 'src/components/Inputs/VolumeSliderButton.vue';
 
 export type AudioFileControlsProps = {
   play: () => void;
