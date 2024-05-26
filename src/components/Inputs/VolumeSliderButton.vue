@@ -19,17 +19,13 @@
 
 <style lang="scss" scoped>
 .slider {
-  // height: 100%;
   position: absolute;
-  // top: 50%;
   transform: translateY(-50%);
   width: 100%;
 }
 .volume-slider {
-  // height: 1em;
   height: 100%;
   width: 7em;
-  // transform: translateY(-50%);
 }
 
 .expand_x-enter-active, .expand_x-leave-active {
