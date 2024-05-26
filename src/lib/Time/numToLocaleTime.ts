@@ -1,4 +1,5 @@
 export const numToLocaleTime = (num: number): string => {
+  num = Math.floor(num);
   const seconds = num % 60;
   const minutes = Math.floor(num / 60) % 60;
   const hours = Math.floor(num / 3600);

@@ -4,7 +4,7 @@
       <!-- Default slot content -->
       <div class="control-button-icon self-center row items-center">
         <Transition name="fade" mode="out-in">
-          <q-icon class="col-12 self-center fit" :key="currentIcon" :name="currentIcon" :style="`color: ${buttonStyles['--color']}`"/>
+          <q-icon class="col-12 self-center button-icon" size="1.5em" :key="currentIcon" :name="currentIcon" :style="`color: ${buttonStyles['--color']}`"/>
         </Transition>
       </div>
 
@@ -38,6 +38,14 @@
 }
 .control-button:active {
   transform: scale(0.95);
+}
+
+.button-icon {
+  height: 1em;
+  width: 1em;
+}
+.button-icon svg {
+  transform: scale(2);
 }
 
 .control-button-icon {

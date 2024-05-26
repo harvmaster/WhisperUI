@@ -1,7 +1,7 @@
 <template>
   <q-page class="row items-center justify-center">
 
-    <div class="col-12 col-sm-12 row q-col-gutter-y-md q-pa-md page-limit-width">
+    <div class="col-12 col-sm-12 col-md-8 row q-col-gutter-y-md q-pa-md page-limit-width">
 
       <!-- Header information -->
       <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-md">
@@ -43,9 +43,9 @@
   width: fit-content
 }
 
-.page-limit-width {
-  max-width: min(50em, 100vw - 2em);
-}
+// .page-limit-width {
+//   max-width: min(50em, 100vw - 2em);
+// }
 </style>
 
 <script setup lang="ts">

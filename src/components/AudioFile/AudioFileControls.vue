@@ -6,16 +6,16 @@
       - volume
       - speed
    -->
-  <div class="row audio-controls">
+  <div class="row q-col-gutter-y-sm">
     <div class="col-auto">
-      <ControlButton @click="toggleStatus" :icon="statusIcon" bg-color="blue-3" text-color="blue-9" />
+      <ControlButton @click="toggleStatus" :icon="statusIcon" bg-color="blue-3" text-color="blue-6" />
     </div>
 
     <div class="col-auto q-px-sm">
       <q-separator vertical class="full-height"/>
     </div>
 
-    <div class="col-auto row q-col-gutter-x-xs">
+    <div class="col-auto row q-col-gutter-x-xs q-col-gutter-y-sm">
       <div class="col-auto">
         <ControlButton @click="() => relativeSeek(-10)" icon="replay_10" />
       </div>
@@ -27,11 +27,11 @@
       </div>
     </div>
 
-    <div class="col-auto q-px-sm">
+    <div class="gt-sm col-md-auto q-px-sm">
       <q-separator vertical class="full-height"/>
     </div>
 
-    <div class="col-auto">
+    <div class="col-12 col-md-auto">
       <speed-control-button icon="speed" :options="speedOptions" :speed="speed" :setSpeed="setSpeed" options-hover-bg-color="blue-2" />
     </div>
 
@@ -39,14 +39,14 @@
 </template>
 
 <style lang="scss" scoped>
-.audio-controls {
-  font-size: 1.25em;
-}
+
 </style>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { PlayerStatus } from 'src/composables/AudioPlayer'
+
+import { symRoundedPlayArrow } from '@quasar/extras/material-symbols-rounded'
 
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
 import VolumeSliderButton from 'src/components/Inputs/VolumeSliderButton.vue';
@@ -76,7 +76,7 @@ const relativeSeek = (seconds: number) => {
 }
 
 const statusIcon = computed(() => {
-  return props.status === PlayerStatus.PLAYING ? 'pause' : 'play_arrow'
+  return props.status === PlayerStatus.PLAYING ? 'sym_r_pause' : symRoundedPlayArrow
 })
 
 const speedOptions = computed(() => {
