@@ -46,7 +46,7 @@
 import { computed, ref } from 'vue'
 import { PlayerStatus } from 'src/composables/AudioPlayer'
 
-import { symRoundedPlayArrow } from '@quasar/extras/material-symbols-rounded'
+import { symRoundedPlayArrow, symRoundedPause } from '@quasar/extras/material-symbols-rounded'
 
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
 import VolumeSliderButton from 'src/components/Inputs/VolumeSliderButton.vue';
@@ -76,7 +76,7 @@ const relativeSeek = (seconds: number) => {
 }
 
 const statusIcon = computed(() => {
-  return props.status === PlayerStatus.PLAYING ? 'sym_r_pause' : symRoundedPlayArrow
+  return props.status === PlayerStatus.PLAYING ? symRoundedPause : symRoundedPlayArrow
 })
 
 const speedOptions = computed(() => {
