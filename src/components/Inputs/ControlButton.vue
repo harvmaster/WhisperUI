@@ -1,5 +1,5 @@
 <template>
-  <button class="control-button relative" :style="buttonStyles" @click="onClick">
+  <button class="control-button relative" :style="buttonStyles" @click="emitClick">
     <slot>
       <!-- Default slot content -->
       <div class="control-button-icon self-center row items-center">
@@ -88,11 +88,10 @@ export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButt
   textColor?: string;
   bgColor?: string;
   hoverBgColor?: string;
-
-  onClick?: () => void;
 }
 
 const props = defineProps<ControlButtonProps>()
+const emit = defineEmits(['click'])
 
 const currentIcon = computed(() => {
   if (Array.isArray(props.icon)) { // Would rather do if (props.state != undefined) but TS doesn't like that
@@ -122,4 +121,8 @@ const buttonStyles = computed(() => {
     '--color': color
   }
 })
+
+const emitClick = () => {
+  emit('click')
+}
 </script>

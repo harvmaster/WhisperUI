@@ -42,7 +42,7 @@
           <q-separator vertical class="full-height"/>
         </div>
         
-        <search-input class="col-12 col-md-auto" />
+        <search-input class="col-12 col-md-auto" v-model="searchInput" placeholder="Search" icon="search" />
       </div>
     </div>
 
@@ -95,6 +95,8 @@ const {
   speed,
   setSpeed,
 } = useAudioPlayer(props.file.src)
+
+const searchInput = ref('')
 
 const timePosition = computed(() => {
   return numToLocaleTime(position.value)
