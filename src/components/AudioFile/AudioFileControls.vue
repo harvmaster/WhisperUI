@@ -6,7 +6,7 @@
       - volume
       - speed
    -->
-  <div class="row">
+  <div class="row audio-controls">
     <div class="col-auto">
       <ControlButton @click="toggleStatus" :icon="statusIcon" bg-color="blue-3" text-color="blue-9" />
     </div>
@@ -39,7 +39,9 @@
 </template>
 
 <style lang="scss" scoped>
-
+.audio-controls {
+  font-size: 1.25em;
+}
 </style>
 
 <script setup lang="ts">
