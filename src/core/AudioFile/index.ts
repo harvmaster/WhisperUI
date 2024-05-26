@@ -5,7 +5,8 @@ import {
   createWaveforms,
   getAudioDuration,
   getCombinedAverageWaveform,
-  transcribeAudio
+  transcribeAudio,
+  diarizeAudio
 } from 'src/lib/Audio';
 
 export type AudioFileProps = {
@@ -79,6 +80,12 @@ export class AudioFile {
     this.transcript = await transcribeAudio(this.file)
     this.loading = false
     return this.transcript;
+  }
+
+  async getDiarization(): Promise<any> {
+    const diarization = await diarizeAudio(this.file)
+    console.log(diarization)
+    return diarization
   }
 
   async toDatabaseAudioFile(): Promise<Database__AudioFile> {
