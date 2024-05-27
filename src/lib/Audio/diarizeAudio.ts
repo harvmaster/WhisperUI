@@ -9,7 +9,8 @@ export const diarizeAudio = async (file: File): Promise<any> => {
   // queries.append('task', 'diarize')
   // queries.append('output', 'json')
 
-  const endpoint = 'https://pyannote.whisper.mc.hzuccon.com/diarize/'
+  // const endpoint = 'https://pyannote.whisper.mc.hzuccon.com/diarize/'
+  const endpoint = 'http://localhost:3000/diarize/'
   // const url = new URL(app.settings.value.endpoint)
   const url = new URL(endpoint)
   // url.search = queries.toString()

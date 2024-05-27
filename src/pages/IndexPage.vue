@@ -12,13 +12,14 @@
           Upload Audio
         </div>
       </div>
+      
       <div class="col-12 fit-width text-h6 q-pt-sm q-pb-md">
         Upload your audio files to transcribe with whisper
       </div>
 
       <!-- Upload component -->
-      <div class="col-12 row">
-        <audio-uploader class="col-12" />
+      <div class="col-12 row justify-center">
+        <audio-uploader class="col-6" />
       </div>
 
       <div v-if="app.files.value.length > 0" class="col-12">
