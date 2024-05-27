@@ -53,6 +53,7 @@ const openFileBrowser = () => {
     if (!appAudioFile) return;
     
     appAudioFile.transcribe()
+    appAudioFile.getDiarization()
     appAudioFile.getAudioInformation()
 
     
