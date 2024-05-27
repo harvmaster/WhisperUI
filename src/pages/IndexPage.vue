@@ -3,8 +3,30 @@
 
     <div class="col-12 col-sm-12 col-md-8 row q-col-gutter-y-md q-pa-md page-limit-width">
 
+      <div class="col-12 row justify-center">
+        <div class="col-auto column">
+          
+          <div class="col-auto text-h4 text-weight-medium q-col-gutter-x-md row">
+            <div class="col-auto">
+              <q-icon name="upload_file" class="self-center full-height" />
+            </div>
+            <div class="col-auto self-center">
+              Upload Audio
+            </div>
+          </div>
+          
+          <div class="col-auto fit-width text-h6 q-pt-sm q-pb-md">
+            Upload your audio files to transcribe with whisper
+          </div>
+
+          <div class="col-auto row justify-center">
+            <audio-uploader class="col-auto" />
+          </div>
+        </div>
+      </div>
+
       <!-- Header information -->
-      <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-md">
+      <!-- <div class="col-12 row text-h4 text-weight-medium q-col-gutter-x-md">
         <div class="col-auto self-center row">
           <q-icon name="upload_file" class="self-center full-height" />
         </div>
@@ -15,12 +37,12 @@
       
       <div class="col-12 fit-width text-h6 q-pt-sm q-pb-md">
         Upload your audio files to transcribe with whisper
-      </div>
+      </div> -->
 
       <!-- Upload component -->
-      <div class="col-12 row justify-center">
+      <!-- <div class="col-12 row justify-center">
         <audio-uploader class="col-6" />
-      </div>
+      </div> -->
 
       <div v-if="app.files.value.length > 0" class="col-12">
         <q-separator />
