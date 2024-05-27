@@ -2,7 +2,7 @@ import { app } from 'boot/app'
 
 export const diarizeAudio = async (file: File): Promise<any> => {
   const formData = new FormData()
-  formData.append('file', file, file.name)
+  formData.append('audio_file', file, file.name)
 
   // const queries = new URLSearchParams()
   // queries.append('encode', app.settings.value.encode.toString())
@@ -18,10 +18,7 @@ export const diarizeAudio = async (file: File): Promise<any> => {
     // Fetch url with no-cors
     const response = await fetch(url.toString(), {
       method: 'POST',
-      body: formData,
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
+      body: formData
     })
 
     if (!response.ok) {
