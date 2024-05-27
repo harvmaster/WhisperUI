@@ -51,7 +51,9 @@
 
     <!-- tracks -->
     <div class="col-12 row">
-
+      <div class="col-12">
+        <audio-file-track-list :file="file" :position="position" />
+      </div>
     </div>
 
     <!-- Dialog -->
@@ -79,6 +81,8 @@ import { numToLocaleTime } from 'src/lib/Time';
 import AudioFileControls from './AudioFileControls.vue';
 import SearchInput from '../Inputs/SearchInput.vue'
 import ControlButton from '../Inputs/ControlButton.vue';
+import AudioFileTrackList from './AudioFileTrackList.vue';
+
 import deleteAudioFile from 'src/core/Database/audioFile/deleteAudioFile';
 
 export type AudioFileProps = {
