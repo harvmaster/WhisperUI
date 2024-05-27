@@ -1,13 +1,17 @@
 <template>
   <q-page class="row justify-center">
-    <div class="col-12">
-      <audio-file v-if="file" :file="file" />
+    <div class="col-12 col-md-8 ">
+      <audio-file class="file-container" v-if="file" :file="file" />
     </div>
   </q-page>
 </template>
 
 <style lang="scss" scoped>
+.file-container {
+  // border: 1px solid #dddddd;
+  border-radius: 2em;
 
+}
 </style>
 
 <script setup lang="ts">

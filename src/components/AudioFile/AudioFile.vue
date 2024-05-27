@@ -3,14 +3,14 @@
 
     <!-- Header -->
     <div class="col-12 row">
-      <span class="col-12 text-h6 text-weight-bold">{{ file.file.name }}</span>
-      <div class="col-12 q-pt-xs">
+      <span class="col-12 q-px-md q-py-sm text-h6 text-weight-bold">{{ file.file.name }}</span>
+      <div class="col-12">
         <q-separator/>
       </div>
     </div>
 
     <!-- Controls & Meta -->
-    <div class="col-12 row justify-between q-col-gutter-y-md q-py-md controls-section">
+    <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
       <div class="col-12 col-md-auto row">
         <audio-file-controls
         :play="play" 
