@@ -2,7 +2,7 @@
 <!-- Not sure how im going to make the amount of pill dynamic yet -->
 <template>
   <div class="">
-    <div ref="audioTrackContainer" class="audio-track-container row relative">
+    <div ref="audioTrackContainer" class="audio-track-container row justify-evenly relative">
       <audio-bar v-for="(bar, index) of audioBars" :key="index" :amplitude="bar" :fill="barPositions[index]" class="audio-bar pill col-auto self-center" />
       <div class="seeker" @click="seekAudio" />
     </div>
@@ -13,6 +13,7 @@
 .audio-track-container {
   width: 100%;
   height: 100%;
+  min-height: 1em;
 }
 
 .seeker {
@@ -23,7 +24,6 @@
   height: 100%;
   background-color: transparent;
   cursor: pointer;
-
 }
 </style>
 

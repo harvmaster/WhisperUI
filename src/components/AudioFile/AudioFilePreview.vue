@@ -1,6 +1,46 @@
 <template>
   <div class="">
-    <div class="audio-file-container row" :style="containerStyle">
+    <div class="row preview-container">
+
+      <!-- Left side of preview -->
+      <div class="col row">
+
+        <!-- File Name -->
+        <div class="col-12 text-h6 q-pa-md ellipsis">
+          {{ file.file.name }}
+        </div>
+
+        <!-- Audio -->
+        <div class="col-12 row track-container q-pa-sm">
+
+          <!-- Play button -->
+          <div class="col-auto self-center">
+            <q-btn v-if="!isPlaying" flat dense round icon="play_arrow" color="blue-8" @click="play" />
+            <q-btn v-else flat dense round icon="pause" color="blue-8" @click="pause" />
+          </div>
+
+          <!-- Track -->
+          <div class="col row">
+            <audio-track v-if="file.audio" class="col-12" :duration="file.audio?.duration" :waveform="file.audio?.waveform" :position="position" :seek="seek" />
+          </div>
+
+          <div class="col-auto self-center">
+            <span class="text-blue-4 text-subtitle1">
+              {{ positionTime }} / {{ durationTime }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Go-to Button (right side of preview) -->
+      <div class="col-auto row bg-blue-2">
+        <div class="self-center fit">
+          <q-btn class="fit q-pa-md" flat dense icon="arrow_forward_ios" color="blue-8" />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="audio-file-container row" :style="containerStyle">
 
       <div class="col-12 fit-height relative text-h6 q-pa-md row" :style="fileNameHeight">
         <span class="col self-center ellipsis">
@@ -34,42 +74,21 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
 
   </div>
 </template>
 
 <style lang="scss" scoped>
-.audio-wave {
-  width: 0.8em;
-  height: 2em; 
-  background-color: $blue-4;
-  margin-right: 0.25em;
-}
-
-.audio-file-container {
-  width: 100%;
+.preview-container {
+  border-radius: 1em;
   background-color: $blue-1;
-  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
-
-}
-
-.audio-file-header {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  transform: translateY(100%);
-
-  transition: transform 0.5s;
-
-  background-color: $blue-2;
-  box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
-}
-
-.audio-file-body {
   overflow: hidden;
-  width: 100%;
+}
+.track-container {
+  height: fit-content;
+  background-color: $blue-2;
+  border-radius: 1em 0 0 0;
 }
 </style>
 
