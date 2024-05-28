@@ -37,7 +37,7 @@ export type PlayerTrackProps = {
 const props = defineProps<PlayerTrackProps>();
 
 const trackElement = ref<HTMLElement | null>(null);
-const seeking = ref({ status: false, playerPos: 0, position: 0 });
+const seeking = ref({ status: false, playerPos: 0, position: 0, distance: 0 });
 
 const computedPosition = computed(() => `${props.position * 100}%`);
 
@@ -46,6 +46,7 @@ const startSeeking = (event: MouseEvent) => {
     status: true,
     playerPos: props.position,
     position: event.clientX,
+    distance: 0
   };
 
   // Allow us to clean up the event listeners
@@ -55,6 +56,7 @@ const startSeeking = (event: MouseEvent) => {
   event.preventDefault();
   event.stopPropagation();
 
+  // Add event listeners
   document.addEventListener('mousemove', handleMouseMove, { signal: abortController.signal });
   document.addEventListener('mouseup', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
 };
@@ -67,6 +69,9 @@ const handleMouseMove = (event: MouseEvent) => {
 
   const offsetX = event.clientX - seeking.value.position;
   const newWidth = offsetX / track.offsetWidth;
+  
+  // This allows us to know if the user has dragged or clicked
+  seeking.value.distance += Math.abs(offsetX);
 
   const position = Math.min(Math.max(seeking.value.playerPos + newWidth, 0), 1);
   props.onSeek?.(position);
@@ -74,7 +79,7 @@ const handleMouseMove = (event: MouseEvent) => {
 
 const endSeeking = (event: MouseEvent, abortController: AbortController) => {
   // set position to the final position if the user hasnt dragged
-  if (Math.abs(props.position - seeking.value.playerPos) < 0.001) {
+  if (seeking.value.distance < 10) {
     const track = trackElement.value;
     if (!track) return;
 
@@ -82,7 +87,8 @@ const endSeeking = (event: MouseEvent, abortController: AbortController) => {
     props.onSeek?.(position);
   }
   
-  seeking.value = { status: false, playerPos: 0, position: 0 };
+  // Reset seeking status
+  seeking.value = { status: false, playerPos: 0, position: 0, distance: 0 };
   abortController.abort();
 };
 
@@ -91,14 +97,13 @@ const handleMouseDown = (event: MouseEvent) => {
 
   const track = trackElement.value;
   const position = event.offsetX / track.offsetWidth;
-  const startingPosition = props.position;
   
   // If the user clicks instead of drags, we want to seek immediately
   setTimeout(() => {
     if (!props.onSeek) return;
-    if (Math.abs(props.position - startingPosition) < 0.05) {
+    if (seeking.value.distance < 10) {
       props.onSeek(position);
-      seeking.value = { status: true, playerPos: position, position: event.clientX };
+      seeking.value = { status: true, playerPos: position, position: event.clientX, distance: 0 };
     }
   }, 200);
 
