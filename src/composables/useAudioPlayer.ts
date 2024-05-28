@@ -1,7 +1,25 @@
-import { PlayerStatus, getAudioPlayer } from 'src/composables/AudioPlayer';
-import { WatchStopHandle, computed, ref, watch } from 'vue';
+import { AudioPlayer, PlayerStatus, getAudioPlayer } from 'src/composables/AudioPlayer';
+import { Ref, WatchStopHandle, computed, ref, watch } from 'vue';
 
-export default function useAudioPlayer(src: string) {
+export type ControlledPlayer = {
+  play: () => void
+  pause: () => void
+  seek: (time: number) => void
+  isActive: Ref<boolean>
+  isPlaying: Ref<boolean>
+  status: Ref<PlayerStatus>
+  position: Ref<number>
+
+  setVolume: (vol: number) => void
+  volume: Ref<number>
+  
+  setSpeed: (spd: number) => void
+  speed: Ref<number>
+  
+  player: AudioPlayer
+}
+
+export default function useAudioPlayer(src: string): ControlledPlayer {
   const player = getAudioPlayer()
 
   const play = () => {
@@ -109,6 +127,6 @@ export default function useAudioPlayer(src: string) {
     setSpeed,
     speed,
     
-    player: player.player
+    player: player
   }
 }

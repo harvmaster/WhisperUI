@@ -13,17 +13,7 @@
     <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
       <div class="col-12 col-md-auto row">
         <audio-file-controls
-        :play="play" 
-        :pause="pause" 
-        :seek="seek" 
-        :status="status" 
-        :position="position"
-        
-        :volume="volume"
-        :setVolume="setVolume"
-        
-        :speed="speed"
-        :setSpeed="setSpeed"
+          :player="player"
         />
       </div>
 
@@ -52,7 +42,7 @@
     <!-- tracks -->
     <div class="col-12 row">
       <div class="col-12">
-        <audio-file-track-list :file="file" :position="position" />
+        <audio-file-track-list :file="file" :player="player" />
       </div>
     </div>
 
@@ -91,6 +81,7 @@ export type AudioFileProps = {
 
 const props = defineProps<AudioFileProps>()
 
+const player = useAudioPlayer(props.file.src)
 const {
   play,
   pause,
@@ -103,7 +94,8 @@ const {
   setVolume,
   speed,
   setSpeed,
-} = useAudioPlayer(props.file.src)
+} = player
+
 
 const searchInput = ref('')
 

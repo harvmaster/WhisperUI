@@ -51,32 +51,45 @@ import { symRoundedPlayArrow, symRoundedPause } from '@quasar/extras/material-sy
 import ControlButton from 'src/components/Inputs/ControlButton.vue';
 import VolumeSliderButton from 'src/components/Inputs/VolumeSliderButton.vue';
 import SpeedControlButton from 'src/components/Inputs/SpeedControlButton.vue';
+import { ControlledPlayer } from 'src/composables/useAudioPlayer';
 
 export type AudioFileControlsProps = {
-  play: () => void;
-  pause: () => void;
-  seek: (position: number) => void;
-  position: number;
-  status: PlayerStatus;
+  // play: () => void;
+  // pause: () => void;
+  // seek: (position: number) => void;
+  // position: number;
+  // status: PlayerStatus;
 
-  volume: number;
-  setVolume: (volume: number) => void;
+  // volume: number;
+  // setVolume: (volume: number) => void;
 
-  speed: number;
-  setSpeed: (speed: number) => void;
+  // speed: number;
+  // setSpeed: (speed: number) => void;
+  player: ControlledPlayer;
 }
 
 const props = defineProps<AudioFileControlsProps>()
+const {
+  play,
+  pause,
+  seek,
+  position,
+  status,
+  volume,
+  setVolume,
+  speed,
+  setSpeed
+} = props.player
 
-const toggleStatus = () => props.status === PlayerStatus.PAUSED ? props.play() : props.pause()
+const toggleStatus = () => status.value === PlayerStatus.PAUSED ? play() : pause()
 
 const relativeSeek = (seconds: number) => {
-  const newPosition = props.position + seconds
-  props.seek(newPosition)
+  const newPosition = position.value + seconds
+  seek(newPosition)
 }
 
 const statusIcon = computed(() => {
-  return props.status === PlayerStatus.PLAYING ? symRoundedPause : symRoundedPlayArrow
+  return status.value === PlayerStatus.PLAYING ? symRoundedPause : symRoundedPlayArrow
 })
 
 const speedOptions = computed(() => {

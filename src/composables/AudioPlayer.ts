@@ -7,6 +7,21 @@ export const PlayerStatus = {
 
 export type PlayerStatus = typeof PlayerStatus[keyof typeof PlayerStatus];
 
+export type AudioPlayer = {
+  player: typeof player
+  src: typeof src
+  status: typeof status
+  position: typeof position
+  volume: typeof volume
+
+  seek: typeof seek
+  play: typeof play
+  pause: typeof pause
+  toggle: () => void
+  setVolume: typeof setVolume
+  setPlaybackRate: typeof setPlaybackRate
+}
+
 const player = ref<HTMLAudioElement>(new Audio())
 const src = ref<string>('')
 const status = ref<PlayerStatus>(PlayerStatus.PAUSED)
@@ -71,7 +86,7 @@ const setPlaybackRate = (rate: number) => {
   player.value.playbackRate = rate
 }
 
-export const getAudioPlayer = () => {
+export const getAudioPlayer = (): AudioPlayer => {
   return {
     player,
     src,
