@@ -51,6 +51,11 @@
       <transcript-container v-if="file.transcript" :transcript="file.transcript" />
     </div>
 
+    <!-- Modal -->
+    <div class="col-12">
+      <control-modal :visible="isActive" :player="player" :file="file" />
+    </div>
+
   </div>
 </template>
 
@@ -77,6 +82,8 @@ import ControlButton from '../Inputs/ControlButton.vue';
 import AudioFileTrackList from './AudioFileTrackList.vue';
 
 import TranscriptContainer from '../Transcript/TranscriptContainer.vue';
+
+import ControlModal from '../Controls/ControlModal.vue';
 
 import deleteAudioFile from 'src/core/Database/audioFile/deleteAudioFile';
 
