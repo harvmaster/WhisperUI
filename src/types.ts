@@ -15,7 +15,7 @@ export type TranscribedAudioSegmentWord = {
   word: string;
 }
 
-export type TrancribedAudioSegment = {
+export type TranscribedAudioSegment = {
   id: number;
   start: number;
   end: number;
@@ -34,7 +34,7 @@ export type TrancribedAudioSegment = {
 export type TranscribedAudio = {
   language: string;
   text: string;
-  segments: TrancribedAudioSegment[]
+  segments: TranscribedAudioSegment[]
 }
 
 export type UploadedAudioFile = {
