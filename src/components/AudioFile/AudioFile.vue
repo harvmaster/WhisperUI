@@ -48,7 +48,7 @@
 
     <!-- Dialog -->
     <div class="col-12">
-
+      <transcript-container v-if="file.transcript" :transcript="file.transcript" />
     </div>
 
   </div>
@@ -57,6 +57,9 @@
 <style lang="scss" scoped>
 .controls-section {
   font-size: 1.25em;
+  position: sticky;
+  top: 50px;
+  background-color: white;
 }
 </style>
 
@@ -72,6 +75,8 @@ import AudioFileControls from './AudioFileControls.vue';
 import SearchInput from '../Inputs/SearchInput.vue'
 import ControlButton from '../Inputs/ControlButton.vue';
 import AudioFileTrackList from './AudioFileTrackList.vue';
+
+import TranscriptContainer from '../Transcript/TranscriptContainer.vue';
 
 import deleteAudioFile from 'src/core/Database/audioFile/deleteAudioFile';
 
