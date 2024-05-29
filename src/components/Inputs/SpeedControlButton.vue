@@ -54,6 +54,10 @@
     background-color: var(--option-hover_bg-color);
   }
 }
+
+.fade-enter-from, .fade-leave-to {
+  z-index: 100;
+}
 </style>
 
 <script setup lang="ts">
@@ -67,6 +71,7 @@ export type SpeedOption = {
 }
 
 export type SpeedControlButtonProps = ControlButtonProps & {
+  icon?: string;
   options: SpeedOption[];
   speed: number;
   setSpeed: (speed: number) => void;

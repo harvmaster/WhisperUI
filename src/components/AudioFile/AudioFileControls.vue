@@ -100,4 +100,8 @@ const speedOptions = computed(() => {
     { label: '2x', value: 2 },
   ]
 })
+
+const log = () => {
+  console.log('clicked')
+}
 </script>

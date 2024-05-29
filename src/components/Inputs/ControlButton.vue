@@ -21,11 +21,10 @@
   height: fit-content;
   padding: 0.4em;
   border-radius: 0.5em;
-  // aspect-ratio: 1/1;
-  cursor: pointer;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 
   color: var(--text-color);
   border: var(--border);
@@ -69,22 +68,8 @@
 import { computed } from 'vue';
 import { colors } from 'quasar';
 
-export type StatefulIcon = {
-  icon: string;
-  key: string;
-}
-
-export type StatefulControlButtonProps = {
-  icon: StatefulIcon[];
-  state?: string;
-}
-
-export type StaticControlButtonProps = {
-  icon: string;
-  state: never;
-}
-
-export type ControlButtonProps = (StatefulControlButtonProps | StaticControlButtonProps) & {
+export type ControlButtonProps = {
+  icon?: string;
   textColor?: string;
   bgColor?: string;
   hoverBgColor?: string;
@@ -94,9 +79,6 @@ const props = defineProps<ControlButtonProps>()
 const emit = defineEmits(['click'])
 
 const currentIcon = computed(() => {
-  if (Array.isArray(props.icon)) { // Would rather do if (props.state != undefined) but TS doesn't like that
-    return props.icon.find((icon) => icon.key === props.state)?.icon || ''
-  }
   return props.icon
 })
 

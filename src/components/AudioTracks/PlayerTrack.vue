@@ -19,6 +19,7 @@
   background-color: rgb(134, 134, 134);
   border-radius: 1000em;
   height: 100%;
+  min-width: 1%;
 
   &.animate {
     transition: width 0.1s;
