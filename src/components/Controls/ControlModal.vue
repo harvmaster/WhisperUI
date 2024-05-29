@@ -6,7 +6,7 @@
     <div class="col-auto row q-col-gutter-x-sm items-end relative">
 
       <div class="col-auto">
-        <control-button icon="replay_10" bg-color="blue-3" text-color="blue-6" />
+        <control-button icon="replay_10" bg-color="blue-4" text-color="blue-10" @click="() => relativeSeek(-10)" />
       </div>
 
       <div class="col-auto row">
@@ -14,11 +14,11 @@
       </div>
       
       <div class="col-auto">
-        <control-button icon="forward_10" bg-color="blue-3" text-color="blue-6" />
+        <control-button icon="forward_10" bg-color="blue-4" text-color="blue-10" @click="() => relativeSeek(10)" />
       </div>
 
       <div class="play-button">
-        <control-button class="" :icon="statusIcon" bg-color="blue-3" text-color="blue-6" />
+        <control-button class="" :icon="statusIcon" bg-color="blue-4" text-color="blue-10" @click="toggleStatus" />
       </div>
     </div>
 
@@ -33,12 +33,15 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: $blue-2;
+  // background-color: rgba(255, 255, 255, 1);
   z-index: 1000;
-  padding: 1em;
+  padding: 0.5em;
   display: flex;
   justify-content: center;
-  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.5);
+  // box-shadow: 0px -2px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px -2px 2px $blue-4;
+  font-size: 1.25em;
   // background-color: white;
 }
 .play-button {
@@ -49,7 +52,7 @@
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translateY(-100%) translateX(-50%);
+  transform: translateY(-75%) translateX(-50%);
   border-radius: 0.5em;
   // box-shadow: 0px 0px 1px 2px $blue-6;
 }
@@ -73,6 +76,25 @@ export type ControlModalProps = {
 };
 
 const props = defineProps<ControlModalProps>();
+
+const {
+  play,
+  pause,
+  seek,
+  position,
+  status,
+  volume,
+  setVolume,
+  speed,
+  setSpeed
+} = props.player
+
+const toggleStatus = () => status.value === PlayerStatus.PAUSED ? play() : pause()
+
+const relativeSeek = (seconds: number) => {
+  const newPosition = position.value + seconds
+  seek(newPosition)
+}
 
 const positionTime = computed(() => numToLocaleTime(props.player.position.value));
 const durationTime = computed(() => numToLocaleTime(props.file.audio?.duration || 0));
