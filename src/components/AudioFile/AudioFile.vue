@@ -41,7 +41,7 @@
 
     <!-- tracks -->
     <div class="col-12 row">
-      <div class="col-12">
+      <div class="col-12 q-px-md">
         <audio-file-track-list :file="file" :player="player" />
       </div>
     </div>

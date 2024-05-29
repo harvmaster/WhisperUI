@@ -10,6 +10,7 @@
   background-color: rgb(228, 228, 228);
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .track-progress {
@@ -19,7 +20,8 @@
   background-color: rgb(134, 134, 134);
   border-radius: 1000em;
   height: 100%;
-  min-width: 1%;
+  min-width: 1em;
+  // padding-top: 100%;
 
   &.animate {
     transition: width 0.1s;
