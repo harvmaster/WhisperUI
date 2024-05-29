@@ -58,7 +58,7 @@
 .controls-section {
   font-size: 1.25em;
   position: sticky;
-  top: 50px;
+  bottom: 0px;
   background-color: white;
 }
 </style>
