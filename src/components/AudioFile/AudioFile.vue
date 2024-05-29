@@ -62,9 +62,6 @@
 <style lang="scss" scoped>
 .controls-section {
   font-size: 1.25em;
-  position: sticky;
-  bottom: 0px;
-  background-color: white;
 }
 </style>
 

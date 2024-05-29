@@ -1,5 +1,6 @@
 <template>
-  <div class="control-modal row">
+  <mobile-controls :file="file" :player="player" />
+  <!-- <div class="control-modal row">
     <div class="col">
     </div>
 
@@ -24,7 +25,7 @@
 
     <div class="col">
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style lang="scss" scoped>
@@ -67,6 +68,8 @@ import { numToLocaleTime } from 'src/lib/Time';
 import { computed } from 'vue';
 import { PlayerStatus } from 'src/composables/AudioPlayer';
 import { symRoundedPause, symRoundedPlayArrow } from '@quasar/extras/material-symbols-rounded';
+
+import MobileControls from './MobileControls.vue';
 
 
 export type ControlModalProps = {
