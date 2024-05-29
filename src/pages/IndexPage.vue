@@ -29,7 +29,7 @@
         <q-separator />
       </div>
 
-      <div class="col-12 row justify-center">
+      <div class="col-12 row q-col-gutter-y-sm justify-center">
         <div class="col-8 row" v-for="file of app.files.value" :key="file.id">
           <audio-file-preview class="col-12" :file="file" />
         </div>
