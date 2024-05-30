@@ -59,7 +59,7 @@
     </div>
 
     <!-- Dialog -->
-    <div class="col-12">
+    <div class="col-12 transcript">
       <transcript-container v-if="file.transcript" :transcript="file.transcript" />
     </div>
 
@@ -75,7 +75,10 @@
 .controls-section {
   font-size: 1.25em;
 }
-
+.transcript {
+  border-radius: 2em;
+  background-color: rgb(228, 228, 228);
+}
 </style>
 
 <script setup lang="ts">

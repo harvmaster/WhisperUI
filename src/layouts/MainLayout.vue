@@ -1,13 +1,24 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-blue-4">
-      <q-toolbar class="full-width row justify-end">
+    <q-header class="bg-transparent">
+      <q-toolbar class="full-width row">
 
-        <q-toolbar-title class="col-auto text-blue-9 text-h6 text-weight-bold">
-          WhisperUI
+        <div class="col-auto">
+          <q-btn
+            flat
+            dense
+            round
+            icon="chevron_left"
+            color="black"
+            @click="goBack"
+          />
+        </div>
+
+        <q-toolbar-title class="col-auto text-blue-9 text-h6 text-weight-bold ellipsis">
+          {{ app.layoutHeader }}
         </q-toolbar-title>
         
-        <div class="col-auto">
+        <!-- <div class="col-auto">
           <q-btn
             flat
             dense
@@ -17,7 +28,7 @@
             color="blue-9"
             @click="toggleSettings"
           />
-        </div>
+        </div> -->
 
       </q-toolbar>
     </q-header>
@@ -32,12 +43,20 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 import SettingsDialog from 'components/Settings/SettingsDialog.vue'
+import { app } from 'src/boot/app';
+
+const router = useRouter()
 
 const settingsDialog = ref<InstanceType<typeof SettingsDialog> | null>(null)
 
 const toggleSettings = () => {
   settingsDialog.value?.toggleVisibility()
+}
+
+const goBack = () => {
+  router.go(-1)
 }
 </script>

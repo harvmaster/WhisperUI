@@ -1,6 +1,24 @@
 // app global css in SCSS form
 :root {
   --font-size: 1rem;
+  @media (prefers-color-scheme: light) {
+    :root {
+      --text: hsl(314, 61%, 7%);
+      --background: hsl(320, 60%, 99%);
+      --primary: hsl(309, 59%, 53%);
+      --secondary: hsl(103, 59%, 74%);
+      --accent: hsl(156, 59%, 62%);
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: hsl(314, 61%, 93%);
+      --background: hsl(320, 60%, 1%);
+      --primary: hsl(309, 59%, 47%);
+      --secondary: hsl(103, 59%, 26%);
+      --accent: hsl(156, 59%, 38%);
+    }
+  }  
 }
 
 @import url('https://fonts.googleapis.com/css?family=Noto%20Sans%20Chorasmian:700|Noto%20Sans%20Chorasmian:400');
