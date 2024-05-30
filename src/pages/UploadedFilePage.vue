@@ -1,6 +1,6 @@
 <template>
   <q-page class="row justify-center">
-    <div class="col-12 col-md-8 ">
+    <div class="col-12 col-md-8">
       <audio-file class="file-container" v-if="file" :file="file" />
     </div>
   </q-page>

@@ -1,5 +1,5 @@
 <template>
-  <mobile-controls :file="file" :player="player" />
+  <mobile-controls :file="file" :player="player" :visible="visible"/>
   <!-- <div class="control-modal row">
     <div class="col">
     </div>
@@ -29,34 +29,34 @@
 </template>
 
 <style lang="scss" scoped>
-.control-modal {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: $blue-2;
-  // background-color: rgba(255, 255, 255, 1);
-  z-index: 1000;
-  padding: 0.5em;
-  display: flex;
-  justify-content: center;
-  // box-shadow: 0px -2px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px -2px 2px $blue-4;
-  font-size: 1.25em;
-  // background-color: white;
-}
-.play-button {
-  // font-size: 2em;
-  // height: 2em;
-  // width: 2em;
-  font-size: 1.25em;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateY(-75%) translateX(-50%);
-  border-radius: 0.5em;
-  // box-shadow: 0px 0px 1px 2px $blue-6;
-}
+// .control-modal {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   background-color: $blue-2;
+//   // background-color: rgba(255, 255, 255, 1);
+//   z-index: 1000;
+//   padding: 0.5em;
+//   display: flex;
+//   justify-content: center;
+//   // box-shadow: 0px -2px 1px rgba(0, 0, 0, 0.5);
+//   box-shadow: 0px -2px 2px $blue-4;
+//   font-size: 1.25em;
+//   // background-color: white;
+// }
+// .play-button {
+//   // font-size: 2em;
+//   // height: 2em;
+//   // width: 2em;
+//   font-size: 1.25em;
+//   position: absolute;
+//   left: 50%;
+//   top: 0;
+//   transform: translateY(-75%) translateX(-50%);
+//   border-radius: 0.5em;
+//   // box-shadow: 0px 0px 1px 2px $blue-6;
+// }
 </style>
 
 <script setup lang="ts">

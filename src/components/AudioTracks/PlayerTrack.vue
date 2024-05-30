@@ -1,5 +1,5 @@
 <template>
-  <div ref="trackElement" class="relative player-track-container" @mousedown="handleMouseDown" draggable="false">
+  <div ref="trackElement" class="relative player-track-container" @mousedown="handleMouseDown" @touchstart="handleTouchStart" draggable="false">
     <div class="track-progress" :style="{ width: computedPosition }" :class="{ animate: !seeking.status }" />
   </div>
 </template>
@@ -61,7 +61,10 @@ const startSeeking = (event: MouseEvent) => {
 
   // Add event listeners
   document.addEventListener('mousemove', handleMouseMove, { signal: abortController.signal });
+  document.addEventListener('touchmove', handleMouseMove, { signal: abortController.signal });
+
   document.addEventListener('mouseup', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
+  document.addEventListener('touchend', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -107,6 +110,25 @@ const handleMouseDown = (event: MouseEvent) => {
     if (seeking.value.distance < 10) {
       props.onSeek(position);
       seeking.value = { status: true, playerPos: position, position: event.clientX, distance: 0 };
+    }
+  }, 200);
+
+  startSeeking(event);
+};
+
+const handleTouchStart = (event: TouchEvent) => {
+  if (!trackElement.value) return;
+
+  const track = trackElement.value;
+  const position = event.touches[0].clientX / track.offsetWidth;
+  event.preventDefault();
+  
+  // If the user clicks instead of drags, we want to seek immediately
+  setTimeout(() => {
+    if (!props.onSeek) return;
+    if (seeking.value.distance < 10) {
+      props.onSeek(position);
+      seeking.value = { status: true, playerPos: position, position: event.touches[0].clientX, distance: 0 };
     }
   }, 200);
 

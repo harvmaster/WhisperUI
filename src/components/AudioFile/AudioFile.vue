@@ -10,35 +10,39 @@
     </div>
 
     <!-- Controls & Meta -->
-    <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
-      <div class="col-12 col-md-auto row">
-        <audio-file-controls
+    <q-intersection
+      @visibility="updateControls"
+    >
+      <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
+        <div class="col-12 col-md-auto row">
+          <audio-file-controls
           :player="player"
-        />
-      </div>
-
-      <div class="col-12 col-md-auto text-subtitle1 text-center self-center">
-         <span class="text-blue-6">
-           {{ timePosition }}
+          />
+        </div>
+        
+        <div class="col-12 col-md-auto text-subtitle1 text-center self-center">
+          <span class="text-blue-6">
+            {{ timePosition }}
           </span>
           <span class="">
             / {{ timeDuration }}
           </span>
-      </div>
-      
-      
-      <div class="col-12 col-md-auto row">
-        <div class="col-auto q-px-sm">
-          <q-separator vertical class="full-height"/>
         </div>
         
-        <search-input class="col-12 col-md-auto" v-model="searchInput" placeholder="Search" icon="search" />
-        <div class="col-auto q-pl-sm">
-          <control-button icon="delete" bg-color="red-2" text-color="red-5" @click="deleteFile"/>
+        
+        <div class="col-12 col-md-auto row">
+          <div class="col-auto q-px-sm">
+            <q-separator vertical class="full-height"/>
+          </div>
+          
+          <search-input class="col-12 col-md-auto" v-model="searchInput" placeholder="Search" icon="search" />
+          <div class="col-auto q-pl-sm">
+            <control-button icon="delete" bg-color="red-2" text-color="red-5" @click="deleteFile"/>
+          </div>
         </div>
       </div>
-    </div>
-
+    </q-intersection>
+      
     <!-- tracks -->
     <div class="col-12 row">
       <div class="col-12 q-px-md">
@@ -52,8 +56,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="col-12">
-      <control-modal :visible="isActive" :player="player" :file="file" />
+    <control-modal :visible="showModal" :player="player" :file="file" />
+    <div class="">
     </div>
 
   </div>
@@ -63,11 +67,13 @@
 .controls-section {
   font-size: 1.25em;
 }
+
 </style>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { app } from 'src/boot/app';
+import { useQuasar } from 'quasar';
 import AudioFile from 'src/core/AudioFile';
 
 import useAudioPlayer from 'src/composables/useAudioPlayer';
@@ -89,6 +95,8 @@ export type AudioFileProps = {
 }
 
 const props = defineProps<AudioFileProps>()
+
+const $q = useQuasar()
 
 const player = useAudioPlayer(props.file.src)
 const {
@@ -119,5 +127,18 @@ const timeDuration = computed(() => {
 const deleteFile = () => {
   deleteAudioFile(props.file.id)
   app.files.value = app.files.value.filter(f => f.id !== props.file.id)
+}
+
+
+const controlsVisible = ref(false)
+const showModal = computed(() => {
+  if ($q.platform.is.mobile) return true
+
+ return !controlsVisible.value
+})
+
+const updateControls = (e: boolean) => {
+  console.log(e)
+  controlsVisible.value = e
 }
 </script>
