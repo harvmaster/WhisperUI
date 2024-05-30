@@ -2,7 +2,7 @@
   <div class="">
 
     <!-- Header -->
-    <div class="col-12 row">
+    <!-- <div class="col-12 row">
       <div class="col-12 row q-px-sm q-py-sm q-col-gutter-x-md">
         <div class="col-auto self-center">
           <q-btn flat round icon="chevron_left" @click="goBack" />
@@ -12,7 +12,7 @@
       <div class="col-12">
         <q-separator/>
       </div>
-    </div>
+    </div> -->
 
     <!-- Controls & Meta -->
     <q-intersection

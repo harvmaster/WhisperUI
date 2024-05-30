@@ -60,6 +60,11 @@ import { app } from 'boot/app'
 
 import AudioUploader from 'components/AudioUploader/AudioUploader.vue';
 import AudioFilePreview from 'components/AudioFile/AudioFilePreview.vue';
+import { onMounted } from 'vue';
 // import AudioFile from 'components/AudioFile/AudioFile.vue';
+
+onMounted(() => {
+  app.layoutHeader.value = 'Whisper'
+})
 
 </script>
