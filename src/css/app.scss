@@ -5,6 +5,32 @@
   color: var(--text);
 }
 
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-background {
+  background-color: var(--dark);
+  color: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-primary {
+    color: var(--background);
+  }
+  .bg-accent {
+    color: var(--background);
+  }
+}
+
 @import url('https://fonts.googleapis.com/css?family=Noto%20Sans%20Chorasmian:700|Noto%20Sans%20Chorasmian:400');
 
 body {
@@ -137,7 +163,7 @@ small {font-size: 0.750rem; /* 12px */}
     --primary: hsl(71, 50%, 50%);
     --secondary: hsl(147, 52%, 30%);
     --accent: hsl(173, 50%, 38%);
-    
+
     --text-50: hsl(70, 46%, 5%);
     --text-100: hsl(68, 45%, 10%);
     --text-200: hsl(69, 47%, 20%);
