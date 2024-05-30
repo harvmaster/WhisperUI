@@ -3,7 +3,12 @@
 
     <!-- Header -->
     <div class="col-12 row">
-      <span class="col-12 q-px-md q-py-sm text-h6 text-weight-bold">{{ file.file.name }}</span>
+      <div class="col-12 row q-px-sm q-py-sm q-col-gutter-x-md">
+        <div class="col-auto self-center">
+          <q-btn flat round icon="chevron_left" @click="goBack" />
+        </div>
+        <span class="col text-h6 text-weight-bold ellipsis-2-lines self-center">{{ file.file.name }}</span>
+      </div>
       <div class="col-12">
         <q-separator/>
       </div>
@@ -11,6 +16,7 @@
 
     <!-- Controls & Meta -->
     <q-intersection
+      class="desktop-only"
       @visibility="updateControls"
     >
       <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
@@ -44,7 +50,7 @@
     </q-intersection>
       
     <!-- tracks -->
-    <div class="col-12 row">
+    <div class="col-12 row desktop-only">
       <div class="col-12 q-px-md">
         <audio-file-track-list :file="file" :player="player" />
       </div>
