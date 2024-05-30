@@ -30,8 +30,8 @@
       </div>
 
       <div class="col-12 row q-col-gutter-y-sm justify-center">
-        <div class="col-8 row" v-for="file of app.files.value" :key="file.id">
-          <audio-file-preview class="col-12" :file="file" />
+        <div class="col-12 row justify-center" v-for="file of app.files.value" :key="file.id">
+          <audio-file-preview class="col-auto file-preview" :file="file" />
         </div>
       </div>
       
@@ -49,7 +49,10 @@
 </template>
 
 <style lang="scss" scoped>
-
+.file-preview {
+  max-width: 100%;
+  width: 40em;
+}
 </style>
 
 <script setup lang="ts">

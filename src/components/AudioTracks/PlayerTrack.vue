@@ -1,5 +1,5 @@
 <template>
-  <div ref="trackElement" class="relative player-track-container" @mousedown="handleMouseDown" @touchstart="handleTouchStart" draggable="false">
+  <div ref="trackElement" class="relative player-track-container" @mousedown="handleMouseDown" @touchstart.prevent="handleTouchStart" draggable="false">
     <div class="track-progress" :style="{ width: computedPosition }" :class="{ animate: !seeking.status }" />
   </div>
 </template>
@@ -61,10 +61,10 @@ const startSeeking = (event: MouseEvent) => {
 
   // Add event listeners
   document.addEventListener('mousemove', handleMouseMove, { signal: abortController.signal });
-  document.addEventListener('touchmove', handleMouseMove, { signal: abortController.signal });
+  // document.addEventListener('touchmove', handleMouseMove, { signal: abortController.signal });
 
   document.addEventListener('mouseup', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
-  document.addEventListener('touchend', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
+  // document.addEventListener('touchend', (event: MouseEvent) => endSeeking(event, abortController), { signal: abortController.signal });
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -107,6 +107,7 @@ const handleMouseDown = (event: MouseEvent) => {
   // If the user clicks instead of drags, we want to seek immediately
   setTimeout(() => {
     if (!props.onSeek) return;
+    if (!seeking.value.status) return;
     if (seeking.value.distance < 10) {
       props.onSeek(position);
       seeking.value = { status: true, playerPos: position, position: event.clientX, distance: 0 };
@@ -121,17 +122,70 @@ const handleTouchStart = (event: TouchEvent) => {
 
   const track = trackElement.value;
   const position = event.touches[0].clientX / track.offsetWidth;
-  event.preventDefault();
+  // event.preventDefault();
   
   // If the user clicks instead of drags, we want to seek immediately
   setTimeout(() => {
     if (!props.onSeek) return;
+    if (!seeking.value.status) return;
     if (seeking.value.distance < 10) {
       props.onSeek(position);
-      seeking.value = { status: true, playerPos: position, position: event.touches[0].clientX, distance: 0 };
+      seeking.value = { status: true, playerPos: position, position: event.touches[0].pageX, distance: 0 };
     }
   }, 200);
 
-  startSeeking(event);
+  startTouchSeek(event);
+};
+
+const startTouchSeek = (event: TouchEvent) => {
+  seeking.value = {
+    status: true,
+    playerPos: props.position,
+    position: event.touches[0].pageX,
+    distance: 0
+  };
+
+  // Allow us to clean up the event listeners
+  const abortController = new AbortController();
+  
+  // Prevent text selection
+  // event.preventDefault();
+  // event.stopPropagation();
+
+  // Add event listeners
+  document.addEventListener('touchmove', handleTouchMove, { signal: abortController.signal, passive: false });
+  document.addEventListener('touchend', (event: TouchEvent) => endTouchSeek(event, abortController), { signal: abortController.signal });
+};
+
+const handleTouchMove = (event: TouchEvent) => {
+  if (!seeking.value.status) return;
+
+  const track = trackElement.value;
+  if (!track) return;
+
+  if (!event.touches[0]) console.log(event)
+  const offsetX = event.touches[0].pageX - seeking.value.position;
+  const newWidth = offsetX / track.offsetWidth;
+  
+  // This allows us to know if the user has dragged or clicked
+  seeking.value.distance += Math.abs(offsetX);
+
+  const position = Math.min(Math.max(seeking.value.playerPos + newWidth, 0), 1);
+  props.onSeek?.(position);
+};
+
+const endTouchSeek = (event: TouchEvent, abortController: AbortController) => {
+  // set position to the final position if the user hasnt dragged
+  // if (seeking.value.distance < 10) {
+  //   const track = trackElement.value;
+  //   if (!track) return;
+
+  //   const position = event.touches[0].clientX / track.offsetWidth;
+  //   props.onSeek?.(position);
+  // }
+  
+  // Reset seeking status
+  seeking.value = { status: false, playerPos: 0, position: 0, distance: 0 };
+  abortController.abort();
 };
 </script>

@@ -40,12 +40,14 @@
 <style lang="scss" scoped>
 .mobile-controls-container {
   --translate-x: 0%;
+  --translate-y: -10%;
   --controls-width: 100vw;
 }
 
 @media screen and (min-width: 600px) {
   .mobile-controls-container {
     --translate-x : -50%;
+    --translate-y: 0%;
     --controls-width: 30em;
   }
 }
@@ -73,7 +75,7 @@
 }
 
 .mobile-controls-container.visible {
-  transform: translateY(0) translateX(var(--translate-x));
+  transform: translateY(var(--translate-y)) translateX(var(--translate-x));
   opacity: 1;
 }
 </style>

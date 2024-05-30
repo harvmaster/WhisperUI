@@ -36,13 +36,15 @@
         </div>
         
         
-        <div class="col-12 col-md-auto row">
-          <div class="col-auto q-px-sm">
+        <div class="col-12 col-md-auto row q-col-gutter-sm">
+          <div class="col-auto">
             <q-separator vertical class="full-height"/>
           </div>
           
-          <search-input class="col-12 col-md-auto" v-model="searchInput" placeholder="Search" icon="search" />
-          <div class="col-auto q-pl-sm">
+          <div class="col-md-auto col-12">
+            <search-input class="col-12 col-md-auto" v-model="searchInput" placeholder="Search" icon="search" />
+          </div>
+          <div class="col-auto">
             <control-button icon="delete" bg-color="red-2" text-color="red-5" @click="deleteFile"/>
           </div>
         </div>
@@ -80,6 +82,7 @@
 import { computed, ref } from 'vue'
 import { app } from 'src/boot/app';
 import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
 import AudioFile from 'src/core/AudioFile';
 
 import useAudioPlayer from 'src/composables/useAudioPlayer';
@@ -103,6 +106,7 @@ export type AudioFileProps = {
 const props = defineProps<AudioFileProps>()
 
 const $q = useQuasar()
+const router = useRouter()
 
 const player = useAudioPlayer(props.file.src)
 const {
@@ -146,5 +150,9 @@ const showModal = computed(() => {
 const updateControls = (e: boolean) => {
   console.log(e)
   controlsVisible.value = e
+}
+
+const goBack = () => {
+  router.go(-1)
 }
 </script>
