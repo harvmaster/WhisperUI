@@ -14,8 +14,8 @@
           />
         </div>
 
-        <q-toolbar-title class="col-auto text-blue-9 text-h6 text-weight-bold ellipsis">
-          {{ app.layoutHeader }}
+        <q-toolbar-title class="col-auto text-dark text-subtitle1 text-weight-bold ellipsis">
+          {{ app.layoutHeader.value }}
         </q-toolbar-title>
         
         <!-- <div class="col-auto">

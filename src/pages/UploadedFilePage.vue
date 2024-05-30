@@ -29,10 +29,15 @@ const file = computed(() => {
 })
 
 watch(file, () => {
+  console.log(file.value)
   if (!file.value) router.push('/')
+
+  console.log(file.value)
+  app.layoutHeader.value = file.value?.file.name || 'File'
 })
 
 onMounted(() => {
   if (!file.value) router.push('/')
+  app.layoutHeader.value = file.value?.file.name || 'File'
 })
 </script>
