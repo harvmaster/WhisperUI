@@ -2,7 +2,7 @@
   <div class="">
 
     <!-- Header -->
-    <div class="col-12 row">
+    <!-- <div class="col-12 row">
       <div class="col-12 row q-px-sm q-py-sm q-col-gutter-x-md">
         <div class="col-auto self-center">
           <q-btn flat round icon="chevron_left" @click="goBack" />
@@ -12,14 +12,14 @@
       <div class="col-12">
         <q-separator/>
       </div>
-    </div>
+    </div> -->
 
     <!-- Controls & Meta -->
     <q-intersection
       class="desktop-only"
       @visibility="updateControls"
     >
-      <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
+      <div class="col-12 row justify-between q-col-gutter-y-md controls-section">
         <div class="col-12 col-md-auto row">
           <audio-file-controls
           :player="player"
@@ -59,8 +59,8 @@
     </div>
 
     <!-- Dialog -->
-    <div class="col-12">
-      <transcript-container v-if="file.transcript" :transcript="file.transcript" />
+    <div class="col-12 row transcript">
+      <transcript-container class="col-12" v-if="file.transcript" :transcript="file.transcript" />
     </div>
 
     <!-- Modal -->
@@ -75,7 +75,10 @@
 .controls-section {
   font-size: 1.25em;
 }
-
+.transcript {
+  border-radius: 2em;
+  background-color: rgb(228, 228, 228);
+}
 </style>
 
 <script setup lang="ts">

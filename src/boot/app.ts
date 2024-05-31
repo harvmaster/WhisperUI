@@ -6,6 +6,8 @@ import { saveSettings, getSettings } from 'src/core/Database/Settings';
 import { AudioFile } from 'src/core/AudioFile';
 
 class App {
+  readonly layoutHeader = ref<string | undefined>();
+  
   readonly files = reactive<{ value: AudioFile[] }>({ value: [] });
   readonly settings = reactive<{ value: Settings }>({ value: { 
     endpoint: '',

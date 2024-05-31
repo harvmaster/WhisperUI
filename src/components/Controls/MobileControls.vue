@@ -24,13 +24,13 @@
       
       <div class="col-12 row justify-center">
         <div class="col-auto">
-          <q-btn flat round icon="skip_previous" />
+          <q-btn flat  size="1.5em" round :icon="roundFastRewind" @click="() => relativeSeek(-15)" />
         </div>
         <div class="col-auto">
-          <q-btn unelevated color="blue-3" text-color="black" round :icon="statusIcon" />
+          <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" @click="toggleStatus"/>
         </div>
         <div class="col-auto">
-          <q-btn flat round icon="skip_next" />
+          <q-btn flat  size="1.5em" round :icon="roundFastForward" @click="() => relativeSeek(15)"/>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
 .mobile-controls-container {
   --translate-x: 0%;
-  --translate-y: -10%;
+  --translate-y: 0%;
   --controls-width: 100vw;
 }
 
@@ -53,37 +53,45 @@
 }
 
 .mobile-controls-container {
-  position: sticky;
-  bottom: 0%;
-  left: 50%;
-  transform: translateY(100%) translateX(var(--translate-x));
+  // position: sticky;
+  // bottom: 0%;
+  // left: 50%;
+  // transform: translateY(100%) translateX(var(--translate-x));
+  // transform: translateX(var(--translate-x));
   opacity: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   
-  width: var(--controls-width);
+  // width: var(--controls-width);
+  width: 100%;
   max-width: 100vw;
-  padding: 0.25em;
+  padding: 0.5em;
   
   transition: all 0.5s;
 }
 
 .mobile-controls {
-  width: 100%;
-  border-radius: 2em;
-  background-color: #f1f1f1;
-  border: 1px solid #e1e1e1;
   padding: 2em;
+  border-radius: 2em;
+
+  width: var(--controls-width);
+  background-color: var(--background-200);
+  // border: 1px solid #e1e1e1;
 }
 
 .mobile-controls-container.visible {
-  transform: translateY(var(--translate-y)) translateX(var(--translate-x));
+  // transform: translateY(var(--translate-y)) translateX(var(--translate-x));
   opacity: 1;
 }
 </style>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
-import { roundPause, roundPlayArrow } from '@quasar/extras/material-icons-round';
+// import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
+// import { roundPause, roundPlayArrow, roundSkipNext, roundSkipPrevious } from '@quasar/extras/material-icons-round';
+import { roundPause, roundPlayArrow, roundFastForward, roundFastRewind } from '@quasar/extras/material-icons-round';
 
 import PlayerTrack from '../AudioTracks/PlayerTrack.vue';
 import AudioFile from 'src/core/AudioFile';
@@ -109,4 +117,17 @@ const handleSeek = (position: number) => {
 }
 
 const statusIcon = computed(() => props.player.status.value == PlayerStatus.PLAYING ? roundPause : roundPlayArrow);
+
+const toggleStatus = () => {
+  if (props.player.status.value == PlayerStatus.PLAYING) {
+    props.player.pause();
+  } else {
+    props.player.play();
+  }
+}
+
+const relativeSeek = (seconds: number) => {
+  if (!props.file.audio) return;
+  props.player.seek(props.player.position.value + seconds);
+}
 </script>

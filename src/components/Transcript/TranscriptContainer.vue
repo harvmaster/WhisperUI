@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-y-sm q-pa-md">
+  <div class="row q-col-gutter-y-sm q-pa-md transcript-container">
     <div class="col-12" v-for="segment of transcript.segments" :key="segment.text">
       <transcribed-segment :segment="segment" />
     </div>
@@ -7,7 +7,9 @@
 </template>
 
 <style lang="scss" scoped>
-
+.transcript-container {
+  background-color: var(--primary);
+}
 </style>
 
 <script setup lang="ts">

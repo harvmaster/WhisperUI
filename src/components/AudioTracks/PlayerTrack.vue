@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 .player-track-container {
   border-radius: 1000em;
-  background-color: rgb(228, 228, 228);
+  background-color: var(--secondary);
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -17,7 +17,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgb(134, 134, 134);
+  background-color: var(--accent);
   border-radius: 1000em;
   height: 100%;
   min-width: 1em;
@@ -35,6 +35,8 @@ import { ref, computed } from 'vue';
 export type PlayerTrackProps = {
   position: number;
   onSeek?: (position: number) => void;
+
+  color?: string;
 };
 
 const props = defineProps<PlayerTrackProps>();
