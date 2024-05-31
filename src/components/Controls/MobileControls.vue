@@ -24,13 +24,13 @@
       
       <div class="col-12 row justify-center">
         <div class="col-auto">
-          <q-btn flat  size="1.5em" round :icon="roundSkipPrevious" />
+          <q-btn flat  size="1.5em" round :icon="roundFastRewind" @click="() => relativeSeek(-15)" />
         </div>
         <div class="col-auto">
           <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" @click="toggleStatus"/>
         </div>
         <div class="col-auto">
-          <q-btn flat  size="1.5em" round :icon="roundSkipNext" />
+          <q-btn flat  size="1.5em" round :icon="roundFastForward" @click="() => relativeSeek(15)"/>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@
 .mobile-controls {
   padding: 2em;
   border-radius: 2em;
-  
+
   width: var(--controls-width);
   background-color: var(--background-200);
   // border: 1px solid #e1e1e1;
@@ -90,7 +90,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 // import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
-import { roundPause, roundPlayArrow, roundSkipNext, roundSkipPrevious } from '@quasar/extras/material-icons-round';
+// import { roundPause, roundPlayArrow, roundSkipNext, roundSkipPrevious } from '@quasar/extras/material-icons-round';
+import { roundPause, roundPlayArrow, roundFastForward, roundFastRewind } from '@quasar/extras/material-icons-round';
 
 import PlayerTrack from '../AudioTracks/PlayerTrack.vue';
 import AudioFile from 'src/core/AudioFile';
@@ -123,5 +124,10 @@ const toggleStatus = () => {
   } else {
     props.player.play();
   }
+}
+
+const relativeSeek = (seconds: number) => {
+  if (!props.file.audio) return;
+  props.player.seek(props.player.position.value + seconds);
 }
 </script>
