@@ -24,13 +24,13 @@
       
       <div class="col-12 row justify-center">
         <div class="col-auto">
-          <q-btn flat round icon="skip_previous" />
+          <q-btn flat  size="1.5em" round icon="skip_previous" />
         </div>
         <div class="col-auto">
-          <q-btn unelevated color="blue-3" text-color="black" round :icon="statusIcon" />
+          <q-btn class="bg-primary" size="1.5em" unelevated round :icon="statusIcon" />
         </div>
         <div class="col-auto">
-          <q-btn flat round icon="skip_next" />
+          <q-btn flat  size="1.5em" round icon="skip_next" />
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
 .mobile-controls-container {
   --translate-x: 0%;
-  --translate-y: -10%;
+  --translate-y: 0%;
   --controls-width: 100vw;
 }
 
@@ -61,7 +61,7 @@
   
   width: var(--controls-width);
   max-width: 100vw;
-  padding: 0.25em;
+  padding: 0.5em;
   
   transition: all 0.5s;
 }
@@ -69,8 +69,8 @@
 .mobile-controls {
   width: 100%;
   border-radius: 2em;
-  background-color: #f1f1f1;
-  border: 1px solid #e1e1e1;
+  background-color: var(--background-200);
+  // border: 1px solid #e1e1e1;
   padding: 2em;
 }
 

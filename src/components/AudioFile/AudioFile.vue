@@ -59,8 +59,8 @@
     </div>
 
     <!-- Dialog -->
-    <div class="col-12 transcript">
-      <transcript-container v-if="file.transcript" :transcript="file.transcript" />
+    <div class="col-12 row transcript">
+      <transcript-container class="col-12" v-if="file.transcript" :transcript="file.transcript" />
     </div>
 
     <!-- Modal -->

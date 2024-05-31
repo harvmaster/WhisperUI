@@ -35,6 +35,8 @@ import { ref, computed } from 'vue';
 export type PlayerTrackProps = {
   position: number;
   onSeek?: (position: number) => void;
+
+  color?: string;
 };
 
 const props = defineProps<PlayerTrackProps>();
