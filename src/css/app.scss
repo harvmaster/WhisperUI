@@ -5,9 +5,15 @@
   color: var(--text);
 }
 
+.txt-text {
+  color: var(--text);
+}
 .bg-primary {
   background-color: var(--primary);
 }
+.bg-primary-2 {
+  background-color: var(--primary-400);
+} 
 
 .bg-secondary {
   background-color: var(--secondary);
@@ -18,7 +24,7 @@
 }
 
 .bg-background {
-  background-color: var(--dark);
+  background-color: var(--background);
   color: var(--text);
 }
 
@@ -41,6 +47,7 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: 'Noto Sans Chorasmian';
   font-weight: 700;
+  color: var(--text);
 }
 
 html {font-size: 100%;} /* 16px */

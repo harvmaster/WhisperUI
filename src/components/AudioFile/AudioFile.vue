@@ -19,7 +19,7 @@
       class="desktop-only"
       @visibility="updateControls"
     >
-      <div class="col-12 row justify-between q-col-gutter-y-md controls-section q-pa-md">
+      <div class="col-12 row justify-between q-col-gutter-y-md controls-section">
         <div class="col-12 col-md-auto row">
           <audio-file-controls
           :player="player"

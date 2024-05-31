@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="app-layout">
-    <q-header class="bg-transparent">
-      <q-toolbar class="full-width row">
+    <q-header class="bg-background">
+      <q-toolbar class="full-width row txt-text">
 
         <div v-if="canGoBack" class="col-auto">
           <q-btn
@@ -9,12 +9,12 @@
             dense
             round
             icon="chevron_left"
-            color="black"
+            color="--text"
             @click="goBack"
           />
         </div>
 
-        <q-toolbar-title class="col-auto text-subtitle1 text-weight-bold ellipsis">
+        <q-toolbar-title class="col text-weight-bold ellipsis text-h6 q-px-md overflow-hidden">
           {{ app.layoutHeader.value }}
         </q-toolbar-title>
         
@@ -44,6 +44,7 @@
 <style lang="scss">
 .app-layout {
   background-color: var(--background);
+  color: inherit;
 }
 </style>
 
