@@ -24,13 +24,13 @@
       
       <div class="col-12 row justify-center">
         <div class="col-auto">
-          <q-btn flat  size="1.5em" round icon="skip_previous" />
+          <q-btn flat  size="1.5em" round :icon="roundSkipPrevious" />
         </div>
         <div class="col-auto">
-          <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" />
+          <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" @click="toggleStatus"/>
         </div>
         <div class="col-auto">
-          <q-btn flat  size="1.5em" round icon="skip_next" />
+          <q-btn flat  size="1.5em" round :icon="roundSkipNext" />
         </div>
       </div>
     </div>
@@ -82,8 +82,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
-import { roundPause, roundPlayArrow } from '@quasar/extras/material-icons-round';
+// import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
+import { roundPause, roundPlayArrow, roundSkipNext, roundSkipPrevious } from '@quasar/extras/material-icons-round';
 
 import PlayerTrack from '../AudioTracks/PlayerTrack.vue';
 import AudioFile from 'src/core/AudioFile';
@@ -109,4 +109,12 @@ const handleSeek = (position: number) => {
 }
 
 const statusIcon = computed(() => props.player.status.value == PlayerStatus.PLAYING ? roundPause : roundPlayArrow);
+
+const toggleStatus = () => {
+  if (props.player.status.value == PlayerStatus.PLAYING) {
+    props.player.pause();
+  } else {
+    props.player.play();
+  }
+}
 </script>
