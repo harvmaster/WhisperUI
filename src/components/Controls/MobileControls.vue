@@ -27,7 +27,7 @@
           <q-btn flat  size="1.5em" round icon="skip_previous" />
         </div>
         <div class="col-auto">
-          <q-btn class="bg-primary" size="1.5em" unelevated round :icon="statusIcon" />
+          <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" />
         </div>
         <div class="col-auto">
           <q-btn flat  size="1.5em" round icon="skip_next" />

@@ -16,11 +16,11 @@
 } 
 
 .bg-secondary {
-  background-color: var(--secondary);
+  background-color: var(--secondary) !important;
 }
 
 .bg-accent {
-  background-color: var(--accent);
+  background-color: var(--accent) !important;
 }
 
 .bg-background {
