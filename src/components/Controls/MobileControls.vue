@@ -58,6 +58,10 @@
   left: 50%;
   transform: translateY(100%) translateX(var(--translate-x));
   opacity: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   
   width: var(--controls-width);
   max-width: 100vw;

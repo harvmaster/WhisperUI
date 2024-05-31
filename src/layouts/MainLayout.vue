@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="app-layout">
+  <q-layout view="lHh Lpr lFf" class="app-layout bg-background">
     <q-header class="bg-background">
       <q-toolbar class="full-width row txt-text">
 
@@ -43,7 +43,7 @@
 
 <style lang="scss">
 .app-layout {
-  background-color: var(--background);
+  // background-color: var(--background);
   color: inherit;
 }
 </style>

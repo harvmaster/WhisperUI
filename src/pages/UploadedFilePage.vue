@@ -3,13 +3,13 @@
     <!-- Desktop -->
 
     <!-- Mobile -->
-    <div class="mobile-only col-12 column">
+    <div class="col-12 column">
 
       <!-- Transcript -->
-      <div class="col mobile-transcript-container">
+      <div class="col full-width row justify-center mobile-transcript-container">
 
         <!-- Im not sure why I need this div, but without it, the border-radius and overflow: hidden dont work -->
-        <div class="fit secondary-transcript-container">
+        <div class="col-12 fit secondary-transcript-container">
           <q-scroll-area class="fit">
             <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" />
           </q-scroll-area>
@@ -38,13 +38,14 @@
 
 .mobile-transcript-container {
   border-radius: 2em;
-  max-width: 100%;
-  width: 40em;
+  // width: 40em;
   padding: 0.5em;
   overflow: hidden;
 }
 
 .secondary-transcript-container {
+  max-width: 50em;
+  
   border-radius: 2em;
   overflow: hidden;
 }
