@@ -24,7 +24,7 @@
 }
 
 .bg-background {
-  background-color: var(--background-100);
+  background-color: var(--background);
   color: var(--text);
 }
 
@@ -34,6 +34,10 @@
   }
   .bg-accent {
     color: var(--background);
+  }
+  .bg-background {
+    background-color: var(--background);
+    color: var(--text);
   }
 }
 
@@ -94,148 +98,152 @@ small {font-size: 0.750rem; /* 12px */}
 
 @media (prefers-color-scheme: light) {
   :root {
-    --text-50: hsl(240, 23%, 95%);
-    --text-100: hsl(240, 25%, 90%);
-    --text-200: hsl(240, 25%, 80%);
-    --text-300: hsl(240, 25%, 70%);
-    --text-400: hsl(240, 25%, 60%);
-    --text-500: hsl(240, 25%, 50%);
-    --text-600: hsl(240, 25%, 40%);
-    --text-700: hsl(240, 25%, 30%);
-    --text-800: hsl(240, 25%, 20%);
-    --text-900: hsl(240, 25%, 10%);
-    --text-950: hsl(240, 23%, 5%);
+    --text-50: #efeff5;
+    --text-100: #dfdfec;
+    --text-200: #bfbfd9;
+    --text-300: #9f9fc6;
+    --text-400: #8080b3;
+    --text-500: #60609f;
+    --text-600: #4d4d80;
+    --text-700: #393960;
+    --text-800: #262640;
+    --text-900: #131320;
+    --text-950: #0a0a10;
 
-    --background-50: hsl(240, 20%, 95%);
-    --background-100: hsl(240, 22%, 90%);
-    --background-200: hsl(240, 20%, 80%);
-    --background-300: hsl(240, 20%, 70%);
-    --background-400: hsl(240, 20%, 60%);
-    --background-500: hsl(240, 20%, 50%);
-    --background-600: hsl(240, 20%, 40%);
-    --background-700: hsl(240, 20%, 30%);
-    --background-800: hsl(240, 20%, 20%);
-    --background-900: hsl(240, 22%, 10%);
-    --background-950: hsl(240, 20%, 5%);
+    --background-50: #f1f2f4;
+    --background-100: #e2e6e9;
+    --background-200: #c5ccd3;
+    --background-300: #a9b3bc;
+    --background-400: #8c99a6;
+    --background-500: #6f7f90;
+    --background-600: #596673;
+    --background-700: #434c56;
+    --background-800: #2c333a;
+    --background-900: #16191d;
+    --background-950: #0b0d0e;
 
-    --primary-50: hsl(249, 28%, 95%);
-    --primary-100: hsl(249, 25%, 90%);
-    --primary-200: hsl(249, 25%, 80%);
-    --primary-300: hsl(249, 25%, 70%);
-    --primary-400: hsl(250, 26%, 60%);
-    --primary-500: hsl(250, 26%, 50%);
-    --primary-600: hsl(250, 26%, 40%);
-    --primary-700: hsl(249, 25%, 30%);
-    --primary-800: hsl(249, 25%, 20%);
-    --primary-900: hsl(249, 25%, 10%);
-    --primary-950: hsl(257, 28%, 5%);
+    --primary-50: #eaeffb;
+    --primary-100: #d5e0f6;
+    --primary-200: #aac1ee;
+    --primary-300: #80a2e5;
+    --primary-400: #5683dc;
+    --primary-500: #2b63d4;
+    --primary-600: #2350a9;
+    --primary-700: #1a3c7f;
+    --primary-800: #112855;
+    --primary-900: #09142a;
+    --primary-950: #040a15;
 
-    --secondary-50: hsl(310, 23%, 95%);
-    --secondary-100: hsl(314, 25%, 90%);
-    --secondary-200: hsl(313, 24%, 80%);
-    --secondary-300: hsl(311, 24%, 70%);
-    --secondary-400: hsl(311, 24%, 60%);
-    --secondary-500: hsl(312, 24%, 50%);
-    --secondary-600: hsl(311, 24%, 40%);
-    --secondary-700: hsl(311, 24%, 30%);
-    --secondary-800: hsl(313, 24%, 20%);
-    --secondary-900: hsl(314, 25%, 10%);
-    --secondary-950: hsl(310, 23%, 5%);
+    --secondary-50: #f1f2f4;
+    --secondary-100: #e2e4e9;
+    --secondary-200: #c6c9d2;
+    --secondary-300: #a9aebc;
+    --secondary-400: #8d93a5;
+    --secondary-500: #70788f;
+    --secondary-600: #5a6072;
+    --secondary-700: #434856;
+    --secondary-800: #2d3039;
+    --secondary-900: #16181d;
+    --secondary-950: #0b0c0e;
 
-    --accent-50: hsl(330, 23%, 95%);
-    --accent-100: hsl(332, 25%, 90%);
-    --accent-200: hsl(332, 25%, 80%);
-    --accent-300: hsl(332, 25%, 70%);
-    --accent-400: hsl(334, 25%, 60%);
-    --accent-500: hsl(333, 25%, 50%);
-    --accent-600: hsl(334, 25%, 40%);
-    --accent-700: hsl(332, 25%, 30%);
-    --accent-800: hsl(332, 25%, 20%);
-    --accent-900: hsl(332, 25%, 10%);
-    --accent-950: hsl(340, 23%, 5%);
+    --accent-50: #eee5ff;
+    --accent-100: #deccff;
+    --accent-200: #bd99ff;
+    --accent-300: #9c66ff;
+    --accent-400: #7a33ff;
+    --accent-500: #5900ff;
+    --accent-600: #4700cc;
+    --accent-700: #360099;
+    --accent-800: #240066;
+    --accent-900: #120033;
+    --accent-950: #09001a;
 
   }
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-50: hsl(240, 23%, 5%);
-    --text-100: hsl(240, 25%, 10%);
-    --text-200: hsl(240, 25%, 20%);
-    --text-300: hsl(240, 25%, 30%);
-    --text-400: hsl(240, 25%, 40%);
-    --text-500: hsl(240, 25%, 50%);
-    --text-600: hsl(240, 25%, 60%);
-    --text-700: hsl(240, 25%, 70%);
-    --text-800: hsl(240, 25%, 80%);
-    --text-900: hsl(240, 25%, 90%);
-    --text-950: hsl(240, 23%, 95%);
+    --text-50: #0a0a10;
+    --text-100: #131320;
+    --text-200: #262640;
+    --text-300: #393960;
+    --text-400: #4d4d80;
+    --text-500: #60609f;
+    --text-600: #8080b3;
+    --text-700: #9f9fc6;
+    --text-800: #bfbfd9;
+    --text-900: #dfdfec;
+    --text-950: #efeff5;
 
-    --background-50: hsl(240, 20%, 5%);
-    --background-100: hsl(240, 22%, 10%);
-    --background-200: hsl(240, 20%, 20%);
-    --background-300: hsl(240, 20%, 30%);
-    --background-400: hsl(240, 20%, 40%);
-    --background-500: hsl(240, 20%, 50%);
-    --background-600: hsl(240, 20%, 60%);
-    --background-700: hsl(240, 20%, 70%);
-    --background-800: hsl(240, 20%, 80%);
-    --background-900: hsl(240, 22%, 90%);
-    --background-950: hsl(240, 20%, 95%);
+    --background-50: #0b0d0e;
+    --background-100: #16191d;
+    --background-200: #2c323a;
+    --background-300: #434b56;
+    --background-400: #596473;
+    --background-500: #6f7d90;
+    --background-600: #8c97a6;
+    --background-700: #a9b1bc;
+    --background-800: #c5cbd3;
+    --background-900: #e2e5e9;
+    --background-950: #f1f2f4;
 
-    --primary-50: hsl(257, 28%, 5%);
-    --primary-100: hsl(249, 25%, 10%);
-    --primary-200: hsl(249, 25%, 20%);
-    --primary-300: hsl(249, 25%, 30%);
-    --primary-400: hsl(250, 26%, 40%);
-    --primary-500: hsl(250, 26%, 50%);
-    --primary-600: hsl(250, 26%, 60%);
-    --primary-700: hsl(249, 25%, 70%);
-    --primary-800: hsl(249, 25%, 80%);
-    --primary-900: hsl(249, 25%, 90%);
-    --primary-950: hsl(249, 28%, 95%);
+    --primary-50: #040a15;
+    --primary-100: #09142a;
+    --primary-200: #112855;
+    --primary-300: #1a3c7f;
+    --primary-400: #2350a9;
+    --primary-500: #2b63d4;
+    --primary-600: #5683dc;
+    --primary-700: #80a2e5;
+    --primary-800: #aac1ee;
+    --primary-900: #d5e0f6;
+    --primary-950: #eaeffb;
 
-    --secondary-50: hsl(310, 23%, 5%);
-    --secondary-100: hsl(314, 25%, 10%);
-    --secondary-200: hsl(313, 24%, 20%);
-    --secondary-300: hsl(311, 24%, 30%);
-    --secondary-400: hsl(311, 24%, 40%);
-    --secondary-500: hsl(312, 24%, 50%);
-    --secondary-600: hsl(311, 24%, 60%);
-    --secondary-700: hsl(311, 24%, 70%);
-    --secondary-800: hsl(313, 24%, 80%);
-    --secondary-900: hsl(314, 25%, 90%);
-    --secondary-950: hsl(310, 23%, 95%);
+    --secondary-50: #0b0c0e;
+    --secondary-100: #16181d;
+    --secondary-200: #2d3039;
+    --secondary-300: #434856;
+    --secondary-400: #5a6072;
+    --secondary-500: #70788f;
+    --secondary-600: #8d93a5;
+    --secondary-700: #a9aebc;
+    --secondary-800: #c6c9d2;
+    --secondary-900: #e2e4e9;
+    --secondary-950: #f1f2f4;
 
-    --accent-50: hsl(340, 23%, 5%);
-    --accent-100: hsl(332, 25%, 10%);
-    --accent-200: hsl(332, 25%, 20%);
-    --accent-300: hsl(332, 25%, 30%);
-    --accent-400: hsl(334, 25%, 40%);
-    --accent-500: hsl(333, 25%, 50%);
-    --accent-600: hsl(334, 25%, 60%);
-    --accent-700: hsl(332, 25%, 70%);
-    --accent-800: hsl(332, 25%, 80%);
-    --accent-900: hsl(332, 25%, 90%);
-    --accent-950: hsl(330, 23%, 95%);
+    --accent-50: #09001a;
+    --accent-100: #120033;
+    --accent-200: #240066;
+    --accent-300: #360099;
+    --accent-400: #4700cc;
+    --accent-500: #5900ff;
+    --accent-600: #7a33ff;
+    --accent-700: #9c66ff;
+    --accent-800: #bd99ff;
+    --accent-900: #deccff;
+    --accent-950: #eee5ff;
 
   }
 }
+
+
+
 @media (prefers-color-scheme: light) {
   :root {
-    --text: hsl(240, 25%, 3%);
-    --background: hsl(240, 20%, 99%);
-    --primary: hsl(250, 26%, 52%);
-    --secondary: hsl(312, 24%, 72%);
-    --accent: hsl(333, 25%, 64%);
+    --text: #06060a;
+    --background: #e8eaed;
+    --primary: #6396fd;
+    --secondary: #f6b1e7;
+    --accent: #bf9ff9;
   }
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: hsl(240, 25%, 97%);
-    --background: hsl(240, 20%, 1%);
-    --primary: hsl(250, 26%, 48%);
-    --secondary: hsl(312, 24%, 28%);
-    --accent: hsl(333, 25%, 36%);
+    --text: #f5f5f9;
+    --background: #2e343c;
+    --primary: #4a7ada;
+    --secondary: #515768;
+    --accent: #c3a2ff;
   }
 }
 
+// #3a424c

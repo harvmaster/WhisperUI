@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 .player-track-container {
   border-radius: 1000em;
-  background-color: var(--secondary);
+  background-color: var(--accent-900);
   height: 100%;
   width: 100%;
   overflow: hidden;

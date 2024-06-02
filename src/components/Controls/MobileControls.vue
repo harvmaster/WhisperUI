@@ -77,7 +77,7 @@
   border-radius: 2em;
 
   width: var(--controls-width);
-  background-color: var(--background-200);
+  background-color: var(--background-300);
   // border: 1px solid #e1e1e1;
 }
 
