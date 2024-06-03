@@ -6,7 +6,7 @@
       <div class="col row">
 
         <!-- File Name -->
-        <div class="col-12 text-h6 q-pa-md ellipsis">
+        <div class="col-12 text-h6 q-pa-md ellipsis" style="font-weight: 700">
           {{ file.file.name }}
         </div>
 

@@ -19,11 +19,11 @@
 <style lang="scss" scoped>
 .audio-upload-container {
   border-radius: 1rem;
-  cursor: pointer;
   width: 100%;
-  // max-width: 600px;
-  aspect-ratio: 16/9;
   border: 2px dashed var(--primary-600);
+  
+  aspect-ratio: 16/9;
+  cursor: pointer;
 }
 </style>
 
