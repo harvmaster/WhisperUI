@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="row preview-container">
+    <div class="row preview-container bg-primary">
 
       <!-- Left side of preview -->
       <div class="col row">
@@ -50,7 +50,6 @@
 <style lang="scss" scoped>
 .preview-container {
   border-radius: 1em;
-  background-color: $blue-1;
   overflow: hidden;
 }
 .track-container {

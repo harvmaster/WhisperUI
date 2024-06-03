@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="q-pa-md audio-upload-container row items-center" @click="openFileBrowser">
+    <div class="q-pa-md audio-upload-container row items-center bg-primary" @click="openFileBrowser">
       <div class="col-12 row justify-center q-col-gutter-y-md">
         <div class="col-auto">
           <q-icon name="cloud_upload" size="100px" color="blue-4" />
@@ -9,7 +9,7 @@
           Drag & Drop your files here or
         </div>
         <div class="text-h5 text-center col-12">
-          <q-btn label="Click to browse" unelevated color="blue-4"/>
+          <q-btn label="Click to browse" unelevated class="bg-primary-700"/>
         </div>
       </div>
     </div>
@@ -18,14 +18,12 @@
 
 <style lang="scss" scoped>
 .audio-upload-container {
-  background-color: $blue-2;
-  color: #212121;
   border-radius: 1rem;
   cursor: pointer;
   width: 100%;
   // max-width: 600px;
   aspect-ratio: 16/9;
-  border: 2px dashed $blue-4;
+  border: 2px dashed var(--primary-600);
 }
 </style>
 
