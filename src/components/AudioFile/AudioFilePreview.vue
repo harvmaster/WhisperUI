@@ -21,7 +21,7 @@
 
           <!-- Track -->
           <div class="col row">
-            <audio-track v-if="file.audio" class="col-12" :duration="file.audio?.duration" :waveform="file.audio?.waveform" :position="position" :seek="seek" />
+            <audio-track v-if="file.audio" class="col-12" :duration="file.audio?.duration" :waveform="file.audio?.waveform" :position="position" :seek="seekTo" />
           </div>
 
           <!-- position and duration -->
@@ -100,6 +100,11 @@ const positionTime = computed(() => {
 const durationTime = computed(() => {
   return numToLocaleTime(props.file.audio?.duration || 0)
 })
+
+const seekTo = (position: number) => {
+  console.log(position)
+  seek(position)
+}
 
 const routeToFile = () => {
   router.push(`/${props.file.id}`)

@@ -23,8 +23,8 @@ export default function useAudioPlayer(src: string): ControlledPlayer {
   const player = getAudioPlayer()
 
   const play = () => {
-    player.seek(position.value)
     player.play(src)
+    player.seek(position.value)
     player.setPlaybackRate(speed.value)
     player.setVolume(volume.value)
   }
