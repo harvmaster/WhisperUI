@@ -11,7 +11,7 @@
         <!-- Im not sure why I need this div, but without it, the border-radius and overflow: hidden dont work -->
         <div class="col-12 fit secondary-transcript-container">
           <q-scroll-area class="fit">
-            <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position"/>
+            <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position" :set-position="seek"/>
           </q-scroll-area>
         </div>
       </div>
@@ -69,7 +69,8 @@ const file = computed(() => {
 const player = useAudioPlayer(file.value?.src)
 
 const {
-  position
+  position,
+  seek
 } = player
 
 watch(file, () => {

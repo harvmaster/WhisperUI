@@ -1,7 +1,7 @@
 <template>
   <div class="row q-col-gutter-y-sm q-pa-md transcript-container bg-primary">
     <div class="col-auto" v-for="segment of flatSegments" :key="segment.word">
-      <transcribed-segment :segment="segment.word" :faded="segment.start > position" />
+      <transcribed-segment :segment="segment" :faded="segment.start > position" @click="() => setPosition(segment.start)"/>
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ import { computed } from 'vue';
 export type TranscriptProps = {
   transcript: TranscribedAudio
   position: number;
+  setPosition: (position: number) => void;
 }
 
 const props = defineProps<TranscriptProps>()
