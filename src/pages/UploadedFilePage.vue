@@ -11,7 +11,7 @@
         <!-- Im not sure why I need this div, but without it, the border-radius and overflow: hidden dont work -->
         <div class="col-12 fit secondary-transcript-container">
           <q-scroll-area class="fit">
-            <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" />
+            <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position"/>
           </q-scroll-area>
         </div>
       </div>
@@ -31,27 +31,20 @@
 
 <style lang="scss" scoped>
 .file-container {
-  // border: 1px solid #dddddd;
   border-radius: 2em;
 
 }
 
 .mobile-transcript-container {
   border-radius: 2em;
-  // width: 40em;
   padding: 0.5em;
   overflow: hidden;
 }
 
 .secondary-transcript-container {
   max-width: 50em;
-  
   border-radius: 2em;
   overflow: hidden;
-}
-
-.mobile-controls-container {
-  // background-color: aliceblue;
 }
 </style>
 
@@ -74,6 +67,10 @@ const file = computed(() => {
 })
 
 const player = useAudioPlayer(file.value?.src)
+
+const {
+  position
+} = player
 
 watch(file, () => {
   if (!file.value) router.push('/')
