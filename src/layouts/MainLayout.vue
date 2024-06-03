@@ -18,17 +18,17 @@
           {{ app.layoutHeader.value }}
         </q-toolbar-title>
         
-        <!-- <div class="col-auto">
+        <div class="col-auto">
           <q-btn
             flat
             dense
             round
             icon="settings"
             aria-label="Menu"
-            color="blue-9"
+            color="--text"
             @click="toggleSettings"
           />
-        </div> -->
+        </div>
 
       </q-toolbar>
     </q-header>
