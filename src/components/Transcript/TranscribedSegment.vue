@@ -10,7 +10,7 @@
 <style lang="scss" scoped>
 .transcript-segment {
   line-height: 2.5em;
-  transition: opacity 0.3s;
+  transition: opacity 0.1s;
   opacity: 1;
   cursor: pointer;
 
