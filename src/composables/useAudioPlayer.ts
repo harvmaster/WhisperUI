@@ -19,7 +19,13 @@ export type ControlledPlayer = {
   player: AudioPlayer
 }
 
+const players = new Map<string, ControlledPlayer>()
+
 export default function useAudioPlayer(src: string): ControlledPlayer {
+  if (players.has(src)) {
+    return players.get(src) as ControlledPlayer
+  }
+
   const player = getAudioPlayer()
 
   const play = () => {
@@ -111,6 +117,24 @@ export default function useAudioPlayer(src: string): ControlledPlayer {
       }
     })
   }
+
+  players.set(src, {
+    play,
+    pause,
+    seek,
+    isActive,
+    isPlaying,
+    status,
+    position,
+
+    setVolume,
+    volume,
+    
+    setSpeed,
+    speed,
+    
+    player: player
+  })
 
   return {
     play,

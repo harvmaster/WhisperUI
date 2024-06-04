@@ -19,7 +19,7 @@
             </div>
 
             <q-intersection>
-              <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position" :set-position="seek"/>
+              <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :file="file" />
             </q-intersection>
           </q-scroll-area>
         </div>
