@@ -47,7 +47,7 @@
               <q-menu class="bg-background" anchor="top middle" self="bottom middle" :offset="[0, 5]" transition-show="jump-up" transition-hide="jump-down">
                 <div class="row">
                   <div class="col-12">
-                    <q-btn class="square" flat size="1em" unelevated icon="delete" />
+                    <q-btn class="square" flat size="1em" unelevated icon="delete" @click="deleteFile"/>
                   </div>
                 </div>
               </q-menu>
@@ -114,6 +114,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router';
+
 import { roundPause, roundPlayArrow, roundFastForward, roundFastRewind } from '@quasar/extras/material-icons-round';
 
 import PlayerTrack from '../AudioTracks/PlayerTrack.vue';
@@ -122,6 +124,8 @@ import AudioFile from 'src/core/AudioFile';
 import { ControlledPlayer } from 'src/composables/useAudioPlayer';
 import { numToLocaleTime } from 'src/lib/Time';
 import { PlayerStatus } from 'src/composables/AudioPlayer';
+import deleteAudioFile from 'src/core/Database/audioFile/deleteAudioFile';
+import { app } from 'src/boot/app';
 
 export type MobileControlsProps = {
   player: ControlledPlayer;
@@ -130,6 +134,7 @@ export type MobileControlsProps = {
 }
 
 const props = defineProps<MobileControlsProps>()
+const router = useRouter()
 
 const timePosition = computed(() => props.file.audio ? numToLocaleTime(props.player.position.value) : '0:00');
 const timeDuration = computed(() => props.file.audio ? numToLocaleTime(props.file.audio.duration) : '0:00');
@@ -152,5 +157,14 @@ const toggleStatus = () => {
 const relativeSeek = (seconds: number) => {
   if (!props.file.audio) return;
   props.player.seek(props.player.position.value + seconds);
+}
+
+const deleteFile = async () => {
+  if (!props.file.audio) return;
+  props.player.pause();
+  await deleteAudioFile(props.file.id);
+  app.files.value = app.files.value.filter(file => file.id !== props.file.id);
+
+  router.push('/');
 }
 </script>
