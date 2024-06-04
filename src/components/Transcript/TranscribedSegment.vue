@@ -41,16 +41,27 @@
 </style>
 
 <script setup lang="ts">
+import useAudioPlayer from 'src/composables/useAudioPlayer';
+import AudioFile from 'src/core/AudioFile';
 import { numToLocaleTime } from 'src/lib/Time';
 import { TranscribedAudioSegmentWord } from 'src/types';
 import { computed, onMounted, onUpdated } from 'vue';
 
 export type TranscribedSegmentProps = {
   segment: TranscribedAudioSegmentWord;
-  faded: boolean;
+  file: AudioFile
 }
 
 const props = defineProps<TranscribedSegmentProps>()
+
+const player = useAudioPlayer(props.file.src)
+const {
+  position
+} = player
+
+const faded = computed(() => {
+  return position.value < props.segment.start
+})
 
 const wordJoiners = [
   '-',
@@ -62,13 +73,5 @@ const isJoiningWord = computed(() => {
 
 const startTime = computed(() => {
   return numToLocaleTime(props.segment.start)
-})
-
-onMounted(() => {
-  console.log('segment loaded')
-})
-
-onUpdated(() => {
-  console.log('segment updated')
 })
 </script>
