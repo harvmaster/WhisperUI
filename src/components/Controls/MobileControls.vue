@@ -47,7 +47,7 @@
               <q-menu class="bg-background" anchor="top middle" self="bottom middle" :offset="[0, 5]" transition-show="jump-up" transition-hide="jump-down">
                 <div class="row">
                   <div class="col-12">
-                    <q-btn class="square" flat size="1em" unelevated icon="delete" @click="deleteFile"/>
+                    <q-btn class="square" flat size="0.75em" unelevated icon="delete" @click="deleteFile"/>
                   </div>
                 </div>
               </q-menu>
