@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-controls-container row" :class="{ visible }">
-    <div class="mobile-controls row">
+    <div class="mobile-controls row relative">
       <div class="col-12 row">
         
         <player-track 
@@ -22,17 +22,50 @@
         </div>
       </div>
       
-      <div class="col-12 row justify-center">
-        <div class="col-auto">
-          <q-btn flat  size="1.5em" round :icon="roundFastRewind" @click="() => relativeSeek(-15)" />
+
+      <div class="col-12 row">
+
+        <!-- Empty div to center next div -->
+        <div class="col"></div>
+
+        <!-- controls -->
+        <div class="col-auto row justify-center">
+          <div class="col-auto">
+            <q-btn flat  size="1.5em" round :icon="roundFastRewind" @click="() => relativeSeek(-15)" />
+          </div>
+          <div class="col-auto">
+            <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" @click="toggleStatus"/>
+          </div>
+          <div class="col-auto">
+            <q-btn flat  size="1.5em" round :icon="roundFastForward" @click="() => relativeSeek(15)"/>
+          </div>
         </div>
-        <div class="col-auto">
-          <q-btn class="bg-accent" size="1.5em" unelevated round :icon="statusIcon" @click="toggleStatus"/>
+
+        <div class="col row justify-end items-center">
+          <div class="col-auto">
+            <q-btn class="" flat size="1em" round icon="more_vert">
+              <q-menu class="bg-background" anchor="top middle" self="bottom middle" :offset="[0, 5]" transition-show="jump-up" transition-hide="jump-down">
+                <div class="row">
+                  <div class="col-12">
+                    <q-btn class="square" flat size="1em" unelevated icon="delete" />
+                  </div>
+                </div>
+              </q-menu>
+            </q-btn>  
+          </div>
         </div>
-        <div class="col-auto">
-          <q-btn flat  size="1.5em" round :icon="roundFastForward" @click="() => relativeSeek(15)"/>
-        </div>
+          
+
       </div>
+      <!-- <div class="col-12 row">
+        <div class="col-auto">
+          <q-btn flat  size="1.5em" round icon="volume_up" />
+        </div>
+      </div> -->
+
+      <!-- <div class="player-actions">
+        <div class=""
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,18 +86,12 @@
 }
 
 .mobile-controls-container {
-  // position: sticky;
-  // bottom: 0%;
-  // left: 50%;
-  // transform: translateY(100%) translateX(var(--translate-x));
-  // transform: translateX(var(--translate-x));
   opacity: 0;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   
-  // width: var(--controls-width);
   width: 100%;
   max-width: 100vw;
   padding: 0.5em;
@@ -78,19 +105,15 @@
 
   width: var(--controls-width);
   background-color: var(--background-300);
-  // border: 1px solid #e1e1e1;
 }
 
 .mobile-controls-container.visible {
-  // transform: translateY(var(--translate-y)) translateX(var(--translate-x));
   opacity: 1;
 }
 </style>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-// import { symRoundedPlayArrow, symRoundedPauseCircle } from '@quasar/extras/material-symbols-rounded';
-// import { roundPause, roundPlayArrow, roundSkipNext, roundSkipPrevious } from '@quasar/extras/material-icons-round';
 import { roundPause, roundPlayArrow, roundFastForward, roundFastRewind } from '@quasar/extras/material-icons-round';
 
 import PlayerTrack from '../AudioTracks/PlayerTrack.vue';
