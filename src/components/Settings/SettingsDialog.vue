@@ -19,14 +19,14 @@
 
           <div class="col-12 row" key="task_select">
             <!-- <q-select class="col-12" v-model="app.settings.value.task" borderless label="Task" :options="whisperOptions.tasks" /> -->
-            <select class="col-12 minimal-select" v-model="app.settings.value.task" borderless label="Task" :options="whisperOptions.tasks">
+            <select class="col-12 minimal-select" v-model="app.settings.value.task" borderless label="Task">
               <option v-for="option in whisperOptions.tasks" :key="option" :value="option">{{ option }}</option>
             </select>
           </div>
 
           <div class="col-12 row" key="language_select" v-if="app.settings.value.task == 'Translate'" >
             <!-- <q-select class="col-12" v-model="app.settings.value.language" outlined label="Language" :options="whisperOptions.language"/> -->
-            <select class="col-12 minimal-select" v-model="app.settings.value.language" outlined label="Language" :options="whisperOptions.language">
+            <select class="col-12 minimal-select" v-model="app.settings.value.language" outlined label="Language">
               <option v-for="option in whisperOptions.language" :key="option.value" :value="option.value">{{ option.label }}</option>
             </select>
 

@@ -11,6 +11,10 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  
 }
 
 .track-progress {

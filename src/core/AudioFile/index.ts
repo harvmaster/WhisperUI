@@ -77,8 +77,14 @@ export class AudioFile {
 
   async transcribe(): Promise<TranscribedAudio | undefined> {
     this.loading = true
-    this.transcript = await transcribeAudio(this.file)
-    this.loading = false
+    try {
+      this.transcript = await transcribeAudio(this.file)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      this.loading = false
+    }
+
     return this.transcript;
   }
 

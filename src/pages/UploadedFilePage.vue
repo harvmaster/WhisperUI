@@ -10,8 +10,17 @@
 
         <!-- Im not sure why I need this div, but without it, the border-radius and overflow: hidden dont work -->
         <div class="col-12 fit secondary-transcript-container">
-          <q-scroll-area class="fit">
-            <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position" :set-position="seek"/>
+          <q-scroll-area class="fit bg-primary">
+            <div v-if="file && file.loading" class="col-12 row justify-center q-pa-md">
+              <div class="col-12 text-center text-h6 text-muted" style="font-weight: 800">
+                Transcribing...
+              </div>
+              <q-spinner-dots color="blue-8" size="2em"/>
+            </div>
+
+            <q-intersection>
+              <TranscriptContainer v-if="file && file.transcript" :transcript="file.transcript" :position="position" :set-position="seek"/>
+            </q-intersection>
           </q-scroll-area>
         </div>
       </div>
@@ -81,5 +90,10 @@ watch(file, () => {
 onMounted(() => {
   if (!file.value) router.push('/')
   app.layoutHeader.value = file.value?.file.name || 'File'
+
+  if (file.value) {
+    if (!file.value.transcript && !file.value.loading) file.value.transcribe()
+    if (!file.value.audio) file.value.getAudioInformation()
+  }
 })
 </script>

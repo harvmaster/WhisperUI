@@ -43,7 +43,7 @@
 <script setup lang="ts">
 import { numToLocaleTime } from 'src/lib/Time';
 import { TranscribedAudioSegmentWord } from 'src/types';
-import { computed } from 'vue';
+import { computed, onMounted, onUpdated } from 'vue';
 
 export type TranscribedSegmentProps = {
   segment: TranscribedAudioSegmentWord;
@@ -62,5 +62,13 @@ const isJoiningWord = computed(() => {
 
 const startTime = computed(() => {
   return numToLocaleTime(props.segment.start)
+})
+
+onMounted(() => {
+  console.log('segment loaded')
+})
+
+onUpdated(() => {
+  console.log('segment updated')
 })
 </script>
