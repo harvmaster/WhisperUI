@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-y-sm q-pa-md transcript-container bg-primary">
+  <div class="row q-col-gutter-y-sm q-pa-md transcript-container" style="background-opacity: 0.8">
     <div class="col-auto" v-for="segment of flatSegments" :key="segment.word">
       <transcribed-segment :segment="segment" :file="file" @click="() => seek(segment.start)"/>
     </div>

@@ -10,7 +10,7 @@
 
         <!-- Im not sure why I need this div, but without it, the border-radius and overflow: hidden dont work -->
         <div class="col-12 fit secondary-transcript-container">
-          <q-scroll-area class="fit bg-primary">
+          <q-scroll-area class="fit bg-primary bg-primary-o80">
             <div v-if="file && file.loading" class="col-12 row justify-center q-pa-md">
               <div class="col-12 text-center text-h6 text-muted" style="font-weight: 800">
                 Transcribing...
@@ -54,6 +54,10 @@
   max-width: 50em;
   border-radius: 2em;
   overflow: hidden;
+}
+
+.bg-primary-o80 {
+  background-color: rgba(159, 207, 253, 0.9) !important;
 }
 </style>
 
